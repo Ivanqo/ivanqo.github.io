@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Обо мне</title>
+    <link rel="stylesheet" href="main-style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <video id="background-video" autoplay muted loop>  
+        <source src="video/bgvideo.mp4" type="video/mp4">  
+    </video>
+
+    <div class="about-container">
+        <h1>Обо мне</h1>
+        <div class="about-content">
+            Раздел в разработке
+        </div>
+        <button class="glitch-button back-button" data-text="Назад">Назад</button>
+    </div>
+
+    <script>
+        document.querySelector('.back-button').addEventListener('click', function() {
+            window.location.href = 'loading-back.html';
+        });
+    </script>
+</body>
+</html>

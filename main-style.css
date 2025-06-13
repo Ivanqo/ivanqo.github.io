@@ -1,0 +1,389 @@
+body {
+    position: relative;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    min-height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.left-text-block {
+    font-family: 'Jura', sans-serif;
+    position: relative;
+    width: 290px;
+    text-shadow: 0 0 5px #2fff00;
+    color: rgb(15, 225, 33);
+    display:flex;
+    flex-direction: column;
+    animation: flicker 3s infinite;
+}
+
+#typewriter-text {
+    text-shadow: 0 0 5px #2fff00;
+    color: rgb(15, 225, 33);
+    position: relative;
+    display: inline-block;
+    min-height: 1.5em; /* Чтобы сохранить пространство при пустом тексте */
+    cursor: pointer;
+}
+
+/* Курсор */
+.typewriter-cursor::after {
+    content: "|";
+    position: absolute;
+    right: -5px;
+    animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+/*Анимация перемещения надписей*/
+
+@keyframes move_down
+{
+    0% { 
+        transform: translateX(-60vw); 
+    }  
+    50% { 
+        transform: translateX(-30vw) translateY(0); 
+    }  
+    100% { 
+        transform: translateX(-30vw) translateY(30vh); 
+    }  
+}
+
+@keyframes move_to_left {  
+    0% { 
+        transform: translateX(0); 
+    }  
+    50% { 
+        transform: translateX(-30vw) translateY(0); 
+    }  
+    100% { 
+        transform: translateX(-30vw) translateY(30vh); 
+    }  
+}  
+.main-prof
+{
+    transform:translateX(-60vw);
+    animation: move_down 4s ease-in-out 9s 1 forwards;
+}
+
+.moving-box {
+    animation: move_to_left 4s ease-in-out 9s 1 forwards;
+}
+/*Конец блока анимации*/
+
+
+/*Фото asci art*/
+/* Стили для фото */
+.photo {
+    position: absolute;
+    top: -250px;
+    right: -150px;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.5s ease;
+    z-index: 10;
+    border: 2px solid #0fe121;
+    box-shadow: 0 0 15px #2fff00;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px;
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+
+.photo img {
+    width: 250px;
+    height: auto;
+    display: block;
+}
+
+
+
+/* Добавим эффект свечения для рамки */
+.photo::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 1px solid #2fff00;
+    border-radius: 8px;
+    animation: border-flicker 2s linear infinite;
+    opacity: 0;
+}
+
+.moving-box:hover .photo::before {
+    opacity: 0.7;
+}
+
+@keyframes border-flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        box-shadow: 0 0 5px #2fff00;
+    }
+    20%, 24%, 55% {
+        box-shadow: 0 0 10px #2fff00;
+    }
+}
+
+
+.moving-box {
+    position: relative;
+    animation: move_to_left 4s ease-in-out 9s 1 forwards;
+}
+.moving-box.animation-complete .photo {
+    pointer-events: auto;
+}
+/*конец стилей для фото -----------------------------------------*/
+
+.right-buttons-block
+{display:flex;
+flex-direction: column;
+justify-content: space-between;}
+
+.glitch-button {margin-bottom: 50px;}
+
+/*Анимация и стили кнопок справа в главном меню*/
+/* Стили для блока кнопок */
+.right-buttons-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 30px;
+    position: fixed;
+    right: -300px; /* Начальное положение за пределами экрана */
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    animation: buttons-slide-in 1s ease-out 10s forwards;
+}
+
+/* Анимация появления кнопок */
+@keyframes buttons-slide-in {
+    0% {
+        right: -300px;
+        opacity: 0;
+    }
+    100% {
+        right: 15vw;
+        opacity: 1;
+    }
+}
+
+.glitch-button {
+    position: relative;
+    color: #0fe121;
+    background: none;
+    border: 2px solid #0fe121;
+    padding: 12px 24px;
+    font-family: 'Jura', sans-serif;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    cursor: pointer;
+    text-transform: uppercase;
+    text-shadow: 0 0 2px #2fff00;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    min-width: 180px;
+    text-align: center;
+}
+
+/* Эффекты при наведении */
+.glitch-button:hover {
+    color: #2fff00;
+    text-shadow: 0 0 5px #2fff00;
+    box-shadow: 0 0 10px #0fe121;
+}
+
+/* Глитч эффекты */
+.glitch-button::before,
+.glitch-button::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 12px 24px;
+    color: #0fe121;
+    background: black;
+    border: 2px solid #0fe121;
+    pointer-events: none;
+    opacity: 0;
+}
+
+.glitch-button::before {
+    left: 3px;
+    text-shadow: -2px 0 #39ff14;
+    clip-path: inset(0 0 50% 0);
+    animation: glitch-anim-1 2s infinite linear alternate-reverse;
+}
+
+.glitch-button::after {
+    left: -3px;
+    text-shadow: 2px 0 #00ffaa;
+    clip-path: inset(50% 0 0 0);
+    animation: glitch-anim-2 1.5s infinite linear alternate-reverse;
+}
+
+.glitch-button:hover::before,
+.glitch-button:hover::after {
+    opacity: 0.7;
+}
+
+@keyframes glitch-anim-1 {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(-3px, -3px); }
+    60% { transform: translate(3px, 3px); }
+    80% { transform: translate(3px, -3px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { transform: translate(0); }
+    20% { transform: translate(3px, -3px); }
+    40% { transform: translate(-3px, 3px); }
+    60% { transform: translate(-3px, -3px); }
+    80% { transform: translate(3px, 3px); }
+    100% { transform: translate(0); }
+}
+
+/* Мигание кнопок */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        opacity: 1;
+        text-shadow: 0 0 5px #2fff00;
+    }
+    20%, 24%, 55% {
+        opacity: 0.6;
+        text-shadow: none;
+    }
+}
+
+.glitch-button {
+    animation: flicker 3s infinite;
+}
+/*----------------*/
+
+
+/*ФОНОВОЕ ВИДЕО*/
+#background-video {  
+    position: fixed;  
+    top: 0;  
+    left: 0;  
+    min-width: 100%;  
+    min-height: 100%;  
+    z-index: -1;  
+    object-fit: cover;  
+    opacity: 0.5;
+}  
+/*------------------*/
+
+
+/* Стили для страницы загрузки */
+.loading-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+}
+
+#loading-text {
+    font-family: 'Jura', sans-serif;
+    color: #0fe121;
+    text-shadow: 0 0 5px #2fff00;
+    font-size: 3rem;
+    margin-bottom: 20px;
+    animation: pulse 1.5s infinite;
+}
+
+.loading-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.loading-dots span {
+    font-family: 'Jura', sans-serif;
+    color: #0fe121;
+    font-size: 3rem;
+    opacity: 0;
+    animation: dot-anim 1.5s infinite;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.4s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+@keyframes dot-anim {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 1000;
+    color: #0fe121;
+    font-family: 'Jura', sans-serif;
+    font-size: 2rem;
+    text-shadow: 0 0 5px #2fff00;
+}
+
+.loading-overlay .loading-dots {
+    display: flex;
+    gap: 5px;
+}
+
+.loading-overlay .loading-dots span {
+    opacity: 0;
+    animation: dot-anim 1.5s infinite;
+}
+
+.loading-overlay .loading-dots span:nth-child(1) { animation-delay: 0.2s; }
+.loading-overlay .loading-dots span:nth-child(2) { animation-delay: 0.4s; }
+.loading-overlay .loading-dots span:nth-child(3) { animation-delay: 0.6s; }
+
+/*-------------------------------------*/
+
+
+.about-container
+{
+    animation: flicker 3s infinite;
+    font-family: "Jura";
+    color:#2fff00;
+}
+.about-content
+{
+    
+    margin-bottom: 10px;
+}
