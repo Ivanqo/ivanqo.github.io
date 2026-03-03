@@ -1,41 +1,347 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main-page</title>
-    <link rel="stylesheet" href="main-style.css">
-        <link href="https://fonts.googleapis.com/css2?family=Jura:wght@400;700&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Иван Басенко — Python / ML Engineer</title>
+  <meta name="description" content="Персональный лендинг: опыт, проекты, навыки, контакты. Python, ML, NLP/RAG, CV, FastAPI, Docker." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;800&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <canvas id="bg"></canvas>
 
-<video id="background-video" autoplay muted loop>  
-    <source src="video/bgvideo.mp4" type="video/mp4">  
-</video> 
-
-
-<div class="left-text-block">
-    <div class="moving-box">
-        <h1 id="typewriter-text"></h1>
-        <div class="photo">
-            <img src="img/photo.png" alt="Фото">
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="brand__text">
+          <div class="brand__name">Иван Басенко</div>
+          <div class="brand__role">Python • ML • NLP/RAG • CV</div>
         </div>
-    </div>
-    <div class="main-prof">Веб разработчик<br>Аналитик данных</div>
-</div>
+      </div>
 
+      <nav class="tabs" aria-label="Разделы">
+        <button class="tab" data-tab="about" aria-controls="panel-about">Обо мне</button>
+        <button class="tab" data-tab="portfolio" aria-controls="panel-portfolio">Портфолио</button>
+        <button class="tab" data-tab="experience" aria-controls="panel-experience">Опыт работы</button>
+        <button class="tab" data-tab="contacts" aria-controls="panel-contacts">Контакты</button>
+        <div class="tabs__glow" aria-hidden="true"></div>
+      </nav>
+    </header>
 
+    <main class="content">
+      <!-- ABOUT -->
+      <section class="panel" id="panel-about" data-panel="about" role="region" aria-label="Обо мне">
+        <div class="grid">
+          <div class="card hero">
+            <div class="hero__top">
+              <div class="chip">Junior+ Python Developer</div>
+              <div class="chip chip--ghost">Москва • Remote/Hybrid</div>
+            </div>
 
-<div class="right-buttons-block">
-    <button class="glitch-button" data-text="Обо мне">Обо мне</button>
-    <button class="glitch-button" data-text="Портфолио">Портфолио</button>
-    <button class="glitch-button" data-text="Опыт работы">Опыт работы</button>
-    <button class="glitch-button" data-text="Контакты">Контакты</button>
-</div>
+            <h1 class="h1">
+              Делаю <span class="neon">продукты на Python</span> — от идеи до MVP и сопровождения
+            </h1>
 
-<script src ="main-script.js">
-</script>
+            <p class="lead">
+              Опыт в машинном обучении и анализе данных в производственной сфере:
+              классический ML, DL, NLP/RAG и Computer Vision. Люблю понятные пайплайны,
+              аккуратный код и измеримые метрики.
+            </p>
 
+            <div class="hero__stats">
+              <div class="stat">
+                <div class="stat__k">1 год</div>
+                <div class="stat__v">коммерческого опыта</div>
+              </div>
+              <div class="stat">
+                <div class="stat__k">RAG / NLP</div>
+                <div class="stat__v">LangChain, HF, OpenAI API</div>
+              </div>
+              <div class="stat">
+                <div class="stat__k">Deploy</div>
+                <div class="stat__v">Docker, FastAPI, CI/CD</div>
+              </div>
+            </div>
 
+            <div class="cta">
+              <a class="btn" href="#contacts" data-jump="contacts">Связаться</a>
+              <a class="btn btn--ghost" href="https://github.com/Ivanqo" target="_blank" rel="noopener">GitHub</a>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="h2">Стек и навыки</h2>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">SQL</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">Flask</span>
+              <span class="tag">Docker</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Git</span>
+              <span class="tag">CI/CD</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">NumPy</span>
+              <span class="tag">scikit-learn</span>
+              <span class="tag">XGBoost</span>
+              <span class="tag">LightGBM</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag">TensorFlow</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">Hugging Face</span>
+              <span class="tag">LangChain</span>
+              <span class="tag">Swagger</span>
+              <span class="tag">Markdown/Sphinx</span>
+            </div>
+
+            <div class="divider"></div>
+
+            <h2 class="h2">Образование</h2>
+            <p class="p">
+              НИУ МГСУ (Москва) — 3 курс, «Информационные системы и технологии в строительстве»
+              (2023–2027).
+            </p>
+
+            <div class="divider"></div>
+
+            <h2 class="h2">Языки</h2>
+            <p class="p">Английский — B2.</p>
+          </div>
+        </div>
+
+        <div class="card wide">
+          <h2 class="h2">О чём этот сайт</h2>
+          <p class="p">
+            Это короткая «витрина» проектов и опыта. Ниже — портфолио с репозиториями,
+            далее — таймлайн работы и контакты.
+          </p>
+          <div class="hint">
+            <span class="kbd">Tab</span> / <span class="kbd">←</span> <span class="kbd">→</span>
+            — переключение разделов
+          </div>
+        </div>
+      </section>
+
+      <!-- PORTFOLIO -->
+      <section class="panel" id="panel-portfolio" data-panel="portfolio" role="region" aria-label="Портфолио">
+        <div class="card wide">
+          <h2 class="h2">Портфолио</h2>
+          <p class="p">
+            Подборка проектов из резюме. Репозитории открываются в новой вкладке.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card project">
+            <div class="project__head">
+              <h3 class="h3">Web приложение НИУ МГСУ (PWA)</h3>
+              <a class="link" href="https://github.com/Ivanqo/web_app" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+            <p class="p">
+              Участие в разработке PWA для университета: авторизация, CRUD для новостей и расписания,
+              адаптивный интерфейс, работа с БД через Django ORM.
+            </p>
+            <div class="tags">
+              <span class="tag">Django</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Pillow</span>
+              <span class="tag">PWA</span>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__head">
+              <h3 class="h3">Telegram-бот регистрации на мероприятия</h3>
+              <a class="link" href="https://t.me/MGSU_registr_bot" target="_blank" rel="noopener">Открыть →</a>
+            </div>
+            <p class="p">
+              Бот на telebot: создание/запись на мероприятия, хранение в PostgreSQL,
+              выгрузка списков участников в Excel, генерация постов через ChatGPT API.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">telebot</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">pandas</span>
+              <span class="tag">psycopg2</span>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__head">
+              <h3 class="h3">Обработчик фотографий (1600+)</h3>
+              <a class="link" href="https://github.com/Ivanqo/photo_processing" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+            <p class="p">
+              Автоматическая обработка фото: удаление фона, коррекция освещения, улучшение качества.
+              Среднее время обработки — ~15 секунд на фото. Использовалось для материалов сборных команд.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">Pillow</span>
+              <span class="tag">rembg</span>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__head">
+              <h3 class="h3">Интерфейс на Python (Flet, 48 часов)</h3>
+              <span class="muted">Хакатон</span>
+            </div>
+            <p class="p">
+              Прототип full‑stack интерфейса на Flet: интерактивные элементы управления и визуализация данных.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">Flet</span>
+              <span class="tag">UI</span>
+            </div>
+          </article>
+
+          <article class="card project">
+            <div class="project__head">
+              <h3 class="h3">Парсер Wildberries</h3>
+              <a class="link" href="https://github.com/Ivanqo/Parsing.git" target="_blank" rel="noopener">GitHub →</a>
+            </div>
+            <p class="p">
+              Сбор данных о товарах (цены, рейтинги) и экспорт в CSV.
+            </p>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">requests</span>
+              <span class="tag">csv</span>
+              <span class="tag">парсинг</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- EXPERIENCE -->
+      <section class="panel" id="panel-experience" data-panel="experience" role="region" aria-label="Опыт работы">
+        <div class="card wide">
+          <h2 class="h2">Опыт работы</h2>
+          <p class="p">
+            Таймлайн по ключевым задачам: автоматизация, ETL, NLP/RAG, CV и полный цикл MVP.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <div class="card job">
+            <div class="job__meta">
+              <div class="job__org">НИУ МГСУ — Институт Физической Культуры и Спорта</div>
+              <div class="job__date">18.02.2025 — 30.06.2025 • 3 месяца</div>
+            </div>
+            <h3 class="h3">Автоматизация учёта мероприятий</h3>
+            <ul class="list">
+              <li>Разработка Telegram‑бота для автоматизации учёта посещаемости.</li>
+              <li>Отслеживание по геолокации + система отметок онлайн.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">telebot</span>
+              <span class="tag">Telegram</span>
+            </div>
+          </div>
+
+          <div class="card job">
+            <div class="job__meta">
+              <div class="job__org">Росатом — Возобновляемая Энергия</div>
+              <div class="job__date">16.06.2025 — н.в. • 6+ месяцев</div>
+            </div>
+            <h3 class="h3">Data/ML Engineer: пайплайны, RAG, CV</h3>
+            <ul class="list">
+              <li>Обработка и анализ табличных данных для предсказательных моделей.</li>
+              <li>Создание ETL‑пайплайнов для Big Data.</li>
+              <li>NLP: чат‑боты и RAG‑пайплайны.</li>
+              <li>Computer Vision: модели CV для учебных и прикладных задач.</li>
+              <li>Полный цикл: идея → прототип → деплой MVP → сопровождение.</li>
+              <li>Эксплуатационная документация и инструкции.</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Python</span>
+              <span class="tag">PostgreSQL</span>
+              <span class="tag">Docker</span>
+              <span class="tag">NLP/RAG</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">Документация</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card wide">
+          <h2 class="h2">Курсы</h2>
+          <ul class="list">
+            <li>SQL (Stepik): интерактивный тренажёр — от SELECT до JOIN и вложенных запросов.</li>
+            <li>Python (Bioinformatics Institute, Stepik): базовые и продвинутые темы, работа с библиотеками.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- CONTACTS -->
+      <section class="panel" id="panel-contacts" data-panel="contacts" role="region" aria-label="Контакты">
+        <div class="grid">
+          <div class="card">
+            <h2 class="h2">Контакты</h2>
+            <div class="contact">
+              <div class="contact__k">Телефон</div>
+              <a class="contact__v" href="tel:+79614016079">+7&nbsp;961&nbsp;401‑60‑79</a>
+            </div>
+            <div class="contact">
+              <div class="contact__k">Email</div>
+              <a class="contact__v" href="mailto:ivan.basenko.05@mail.ru">ivan.basenko.05@mail.ru</a>
+            </div>
+            <div class="contact">
+              <div class="contact__k">GitHub</div>
+              <a class="contact__v" href="https://github.com/Ivanqo" target="_blank" rel="noopener">github.com/Ivanqo</a>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="cta">
+              <a class="btn" href="mailto:ivan.basenko.05@mail.ru?subject=Связаться%20по%20лендингу%20(Иван%20Басенко)">Написать письмо</a>
+              <a class="btn btn--ghost" href="https://t.me/" target="_blank" rel="noopener">Telegram (укажи)</a>
+            </div>
+
+            <p class="note">
+              Подсказка: открой <span class="kbd">styles.css</span> и замени ссылки/тексты (например Telegram),
+              если нужно.
+            </p>
+          </div>
+
+          <div class="card">
+            <h2 class="h2">Быстрая настройка GitHub Pages</h2>
+            <ol class="ol">
+              <li>Создай репозиторий <span class="kbd">ivanqo.github.io</span> (или используй существующий).</li>
+              <li>Залей содержимое этого архива в корень репозитория.</li>
+              <li>GitHub → Settings → Pages → Deploy from a branch → <span class="kbd">main</span>, <span class="kbd">/(root)</span>.</li>
+              <li>Открой <span class="kbd">https://ivanqo.github.io</span>.</li>
+            </ol>
+
+            <div class="divider"></div>
+
+            <h2 class="h2">Хобби</h2>
+            <p class="p">Фантастические сериалы, автомобили и игры (сюжетные и онлайн).</p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__left">
+        <span class="dot"></span>
+        <span>Built with HTML/CSS/JS • Cyberpunk UI</span>
+      </div>
+      <div class="footer__right">
+        <a class="link" href="#about" data-jump="about">↑ Наверх</a>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
 </body>
 </html>
