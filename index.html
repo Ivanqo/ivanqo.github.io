@@ -1,347 +1,1167 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Иван Басенко — Python / ML Engineer</title>
-  <meta name="description" content="Персональный лендинг: опыт, проекты, навыки, контакты. Python, ML, NLP/RAG, CV, FastAPI, Docker." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;800&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Иван Басенко — AI / ML Engineer · Python</title>
+<meta name="description" content="Иван Басенко — AI / ML Engineer, Python. ИИ для строительной документации: OCR, RAG, сверка ПД/РД/ИД, BIM/IFC.">
+<meta name="theme-color" content="#061220">
+<meta name="author" content="Иван Басенко">
+<link rel="canonical" href="https://ivanqo.github.io/">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/favicon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ivanqo.github.io/">
+<meta property="og:title" content="Иван Басенко — AI / ML Engineer · Python">
+<meta property="og:description" content="Учу машины читать, проверять и сверять документы. Document AI: OCR, RAG, сверка ПД/РД/ИД, BIM/IFC.">
+<meta property="og:image" content="https://ivanqo.github.io/assets/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="assets/portrait.webp" type="image/webp" media="(min-width:1101px)">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;700&family=Manrope:wght@400;500;600&family=Martian+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ===================== C · BLUEPRINT — токены ===================== */
+:root{
+  --bg:#061220; --bg-2:#0A1B2E; --bg-3:#0F2540;
+  --grid:rgba(111,182,255,.06); --grid-2:rgba(111,182,255,.13);
+  --line:#1C3756; --line-2:#2D5784;
+  --text:#E6EEF8; --muted:#93AAC6; --dim:#5A7495;
+  --blue:#6FB6FF; --amber:#FFB547; --ok:#5BE3A1; --err:#FF6B6B;
+  --r-0:0; --r-1:3px; --r-2:8px;
+  --f-d:'Unbounded',system-ui,sans-serif; --f-b:'Manrope',system-ui,sans-serif; --f-m:'Martian Mono',ui-monospace,monospace;
+  --ease:cubic-bezier(.16,1,.3,1); --ease-io:cubic-bezier(.83,0,.17,1);
+  --pad:clamp(24px,5vw,80px); --max:1320px; --sec:clamp(100px,13vw,170px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
+html.lock{overflow:hidden}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.65 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:linear-gradient(var(--grid-2) 1px,transparent 1px),linear-gradient(90deg,var(--grid-2) 1px,transparent 1px),linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,24px 24px,24px 24px;background-attachment:fixed}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--amber);color:var(--bg)}
+.mono{font-family:var(--f-m);font-size:11px;letter-spacing:.06em;text-transform:uppercase}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--pad);position:relative}
+.has-cursor, .has-cursor a, .has-cursor button, .has-cursor [data-proj]{cursor:none}
+:focus-visible{outline:1px dashed var(--amber);outline-offset:4px}
+.amb{color:var(--amber)}
+
+/* рамка листа */
+.frame{position:fixed;inset:10px;border:1px solid var(--line);pointer-events:none;z-index:45}
+.frame i{position:absolute;width:14px;height:14px;border-color:var(--blue);border-style:solid;border-width:0}
+.frame i:nth-child(1){top:-1px;left:-1px;border-top-width:2px;border-left-width:2px}
+.frame i:nth-child(2){top:-1px;right:-1px;border-top-width:2px;border-right-width:2px}
+.frame i:nth-child(3){bottom:-1px;left:-1px;border-bottom-width:2px;border-left-width:2px}
+.frame i:nth-child(4){bottom:-1px;right:-1px;border-bottom-width:2px;border-right-width:2px}
+.frame .sheet{position:absolute;right:16px;bottom:10px;font:10px var(--f-m);color:var(--dim);letter-spacing:.08em}
+
+/* прелоадер — «чертёж рисуется» */
+.preloader{position:fixed;inset:0;z-index:100;background:var(--bg);display:grid;place-items:center;transition:opacity .6s var(--ease),visibility .6s}
+.preloader.gone{opacity:0;visibility:hidden}
+.pre-svg{width:140px;color:var(--blue)}
+.pre-svg path{stroke-dasharray:600;stroke-dashoffset:600;animation:draw 1.1s var(--ease) forwards}
+.pre-svg path:nth-child(2){animation-delay:.15s;stroke:var(--amber)}
+.pre-svg path:nth-child(3){animation-delay:.3s}
+@keyframes draw{to{stroke-dashoffset:0}}
+.pre-txt{margin-top:18px;color:var(--muted);text-align:center}
+
+/* курсор — перекрестье с координатами */
+.cur-dot{display:none}
+.cur-ring{position:fixed;top:0;left:0;z-index:200;pointer-events:none;width:30px;height:30px;margin:-15px 0 0 -15px;transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease)}
+.cur-ring::before,.cur-ring::after{content:"";position:absolute;background:var(--blue)}
+.cur-ring::before{left:50%;top:0;bottom:0;width:1px}
+.cur-ring::after{top:50%;left:0;right:0;height:1px}
+.cur-ring.hover{width:52px;height:52px;margin:-26px 0 0 -26px}
+.cur-ring.hover::before,.cur-ring.hover::after{background:var(--amber)}
+.cur-xy{position:fixed;top:0;left:0;z-index:200;pointer-events:none;font:9.5px var(--f-m);color:var(--blue);letter-spacing:.06em;white-space:nowrap}
+
+/* шапка */
+.progress{position:fixed;top:10px;left:10px;right:10px;height:2px;background:var(--amber);transform-origin:left;transform:scaleX(0);z-index:60}
+.hdr{position:fixed;top:10px;left:10px;right:10px;z-index:50;border-bottom:1px solid transparent;transition:background .4s,border-color .4s}
+.scrolled .hdr{background:rgba(6,18,32,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-color:var(--line)}
+.hdr .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:12px;font:500 13px var(--f-d)}
+.ph-xs{width:32px;height:32px;border:1px solid var(--line-2);display:block;object-fit:cover;background:var(--bg-2)}
+.nav{display:flex;margin-left:auto;border:1px solid var(--line)}
+.nav a{font:500 10.5px var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding:10px 14px;border-right:1px solid var(--line);transition:background .3s,color .3s}
+.nav a:last-child{border-right:0}
+.nav a:hover{color:var(--text);background:var(--bg-3)}
+.nav a.active{color:var(--bg);background:var(--blue)}
+.burger{display:none;margin-left:auto;background:var(--bg-2);border:1px solid var(--line-2);color:var(--text);font:500 10.5px var(--f-m);letter-spacing:.08em;padding:12px 14px}
+
+/* кнопки */
+.btn{display:inline-flex;align-items:center;gap:12px;height:54px;padding:0 24px;font:500 13px/1 var(--f-d);letter-spacing:.01em;border:1px solid var(--line-2);color:var(--text);background:var(--bg-2);position:relative;transition:transform .4s var(--ease),background .3s,border-color .3s,color .3s;will-change:transform}
+.btn::before,.btn::after{content:"";position:absolute;width:8px;height:8px;border-color:var(--amber);border-style:solid;opacity:0;transition:opacity .3s,transform .4s var(--ease)}
+.btn::before{top:-5px;left:-5px;border-width:1px 0 0 1px;transform:translate(4px,4px)}
+.btn::after{bottom:-5px;right:-5px;border-width:0 1px 1px 0;transform:translate(-4px,-4px)}
+.btn:hover::before,.btn:hover::after{opacity:1;transform:none}
+.btn:hover{border-color:var(--blue)}
+.btn-primary{background:var(--amber);border-color:var(--amber);color:#1A1204}
+.btn-primary:hover{background:#FFC673;border-color:#FFC673}
+.btn small{font:10px var(--f-m);opacity:.7}
+
+/* плейсхолдеры */
+.ph{position:relative;background:repeating-linear-gradient(45deg,rgba(111,182,255,.05) 0 8px,transparent 8px 16px),var(--bg-2);border:1px solid var(--line-2)}
+.ph .bust{position:absolute;left:50%;bottom:0;width:76%;transform:translateX(-50%);color:var(--blue);opacity:.7}
+.ph-label{position:absolute;left:10px;top:10px;right:10px;font:9.5px/1.5 var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ph-label b{color:var(--amber);font-weight:400}
+.dim-h,.dim-v{position:absolute;font:9.5px var(--f-m);color:var(--blue);display:flex;align-items:center;justify-content:center}
+.dim-h{left:0;right:0;top:-22px;height:12px;border-left:1px solid var(--blue);border-right:1px solid var(--blue)}
+.dim-h::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:var(--blue);opacity:.6}
+.dim-h span,.dim-v span{position:relative;background:var(--bg);padding:0 6px}
+.dim-v{top:0;bottom:0;right:-26px;width:12px;border-top:1px solid var(--blue);border-bottom:1px solid var(--blue)}
+.dim-v::before{content:"";position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--blue);opacity:.6}
+.dim-v span{writing-mode:vertical-rl;padding:6px 0}
+
+/* ===================== HERO ===================== */
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden}
+.hero-3d{position:absolute;top:0;right:0;bottom:0;width:60%}
+#gl{width:100%;height:100%;display:block}
+.no-gl #gl{display:none}
+.markers{position:absolute;inset:0;pointer-events:none}
+.marker{position:absolute;top:0;left:0;font:9.5px/1.35 var(--f-m);letter-spacing:.06em;color:var(--err);white-space:nowrap;opacity:0;transition:opacity .4s}
+.marker.on{opacity:1}
+.marker::before{content:"";position:absolute;left:-5px;top:-5px;width:10px;height:10px;border-radius:50%;background:var(--err);box-shadow:0 0 0 0 rgba(255,107,107,.6);animation:mping 1.4s infinite}
+.marker span{position:absolute;left:14px;top:-26px;padding:5px 8px;background:rgba(6,18,32,.85);border:1px solid rgba(255,107,107,.5)}
+.marker span b{color:var(--text);font-weight:400}
+@keyframes mping{to{box-shadow:0 0 0 12px rgba(255,107,107,0)}}
+.hero-text{position:relative;z-index:2;max-width:640px}
+.stamp{display:inline-flex;border:1px solid var(--line-2);background:rgba(6,18,32,.7)}
+.stamp span{padding:8px 12px;border-right:1px solid var(--line-2);color:var(--muted)}
+.stamp span:last-child{border-right:0;color:var(--amber)}
+.hero-name{margin:32px 0 0;font:700 clamp(46px,7.6vw,112px)/.95 var(--f-d);letter-spacing:-.04em;text-transform:uppercase}
+.hero-name .line{display:block;overflow:hidden}
+.hero-name .line > span{display:inline-block}
+.hero-name .line:last-child > span{color:transparent;-webkit-text-stroke:1.5px var(--blue)}
+.hero-role{margin:22px 0 0;color:var(--blue);font-size:12px}
+.hero-tag{margin:22px 0 14px;font:500 clamp(20px,2.2vw,28px)/1.3 var(--f-d);letter-spacing:-.01em}
+.hero-tag mark{background:none;color:var(--amber)}
+.hero-pitch{color:var(--muted);margin:0 0 28px;max-width:52ch}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px}
+.hero-photo{--pw:clamp(240px,21vw,320px);position:absolute;right:var(--pad);top:calc(50% - var(--pw) * .625 + 24px);width:var(--pw);margin:0;z-index:2}
+.hero-photo picture,.hero-photo img{display:block;width:100%;height:auto;aspect-ratio:4/5}
+.hero-photo img{border:1px solid var(--line-2);background:var(--bg-2)}
+.hero-photo figcaption{display:flex;justify-content:space-between;margin-top:10px;color:var(--dim)}
+
+.intro{opacity:0;transform:translateY(22px)}
+.ready .intro{opacity:1;transform:none;transition:opacity 1s var(--ease) var(--d,0ms),transform 1s var(--ease) var(--d,0ms)}
+.hero-name .line > span{transform:translateY(105%)}
+.ready .hero-name .line > span{transform:none;transition:transform 1.1s var(--ease) var(--d,0ms)}
+
+/* секции */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s var(--ease) var(--d,0ms),transform .9s var(--ease) var(--d,0ms)}
+.reveal.in{opacity:1;transform:none}
+.sec{padding:var(--sec) 0 0}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:end;margin-bottom:52px;padding-bottom:18px;border-bottom:1px solid var(--line-2);position:relative}
+.sec-head::after{content:"";position:absolute;left:0;bottom:-1px;width:120px;height:3px;background:var(--amber)}
+.sheet-no{font:500 11px var(--f-m);color:var(--amber);letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--amber);padding:8px 10px;align-self:center}
+.sec-head h2{margin:0;font:700 clamp(28px,4.4vw,60px)/1 var(--f-d);letter-spacing:-.03em;text-transform:uppercase}
+.sec-head p{grid-column:1/-1;margin:0;color:var(--muted);max-width:64ch}
+
+/* ведомость показателей */
+.stats{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid var(--line-2);background:rgba(10,27,46,.7);margin-top:-1px}
+.stat{padding:22px 18px;border-right:1px solid var(--line)}
+.stat:last-child{border-right:0}
+.stat-v{font:700 clamp(22px,2.4vw,34px)/1 var(--f-d);letter-spacing:-.03em;white-space:nowrap}
+.stat-v small{font:400 .4em var(--f-m);color:var(--muted)}
+.stat:last-child .stat-v{color:var(--amber)}
+.stat-l{margin-top:12px;font:10px/1.5 var(--f-m);color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+.stats-cap{display:flex;justify-content:space-between;color:var(--dim);margin-top:10px}
+
+/* пояснительная записка */
+.about-grid{display:grid;grid-template-columns:260px 1fr;gap:clamp(32px,5vw,72px)}
+.avatar-wrap{position:relative;margin-top:24px}
+.avatar{position:relative;z-index:1;width:100%;aspect-ratio:1;border-radius:50%;margin:0;overflow:hidden;border:1px solid var(--line-2);background:var(--bg-2)}
+.avatar img{display:block;width:100%;height:100%;object-fit:cover}
+.avatar-wrap::before,.avatar-wrap::after{content:"";position:absolute;z-index:0;background:var(--blue);opacity:.5}
+.avatar-wrap::before{left:50%;top:-20px;bottom:-20px;width:1px}
+.avatar-wrap::after{top:50%;left:-20px;right:-20px;height:1px}
+.avatar-cap{margin-top:30px;color:var(--dim);text-align:center}
+.about-text{columns:2;column-gap:40px}
+.about-text p{margin:0 0 18px;break-inside:avoid;color:#C4D3E6}
+.about-text p:first-child{column-span:all;font:500 clamp(20px,2.1vw,27px)/1.4 var(--f-d);letter-spacing:-.01em;color:var(--text);margin-bottom:28px}
+.about-text strong{color:var(--amber);font-weight:500}
+.strengths{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:72px;border:1px solid var(--line-2)}
+.strength{padding:26px 22px;border-right:1px solid var(--line);position:relative;background:rgba(10,27,46,.6);transition:background .3s}
+.strength:last-child{border-right:0}
+.strength:hover{background:var(--bg-3)}
+.strength-n{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;border:1px solid var(--amber);font:500 11px var(--f-m);color:var(--amber)}
+.strength-n::before{content:"У"}
+.strength h3{margin:16px 0 8px;font:500 17px/1.25 var(--f-d)}
+.strength p{margin:0;font-size:14.5px;color:var(--muted);line-height:1.55}
+
+/* спецификация */
+.filter{display:inline-flex;border:1px solid var(--line-2);margin-bottom:18px}
+.filter button{all:unset;cursor:pointer;font:500 10.5px var(--f-m);letter-spacing:.06em;text-transform:uppercase;padding:10px 14px;color:var(--muted);border-right:1px solid var(--line-2)}
+.filter button:last-child{border-right:0}
+.filter button[aria-pressed="true"]{background:var(--blue);color:var(--bg)}
+.spec{width:100%;border-collapse:collapse;border:1px solid var(--line-2);background:rgba(10,27,46,.6)}
+.spec th{font:500 10px var(--f-m);letter-spacing:.06em;text-transform:uppercase;color:var(--dim);text-align:left;padding:12px 16px;border-bottom:1px solid var(--line-2);border-right:1px solid var(--line)}
+.spec td{padding:16px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);vertical-align:top}
+.spec td:first-child{font:500 11px var(--f-m);color:var(--amber);width:70px}
+.spec td:nth-child(2){font:500 14px var(--f-d);width:200px}
+.spec td:last-child{font:10.5px var(--f-m);color:var(--muted);width:120px;text-transform:uppercase}
+.spec ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.spec li{font:12px/1 var(--f-m);padding:7px 9px;border:1px solid var(--line);color:#C4D3E6;transition:opacity .4s,border-color .3s}
+.spec li:hover{border-color:var(--blue)}
+.spec li.core{border-color:var(--amber);color:var(--amber);background:rgba(255,181,71,.07)}
+.spec.core-only li:not(.core){opacity:.15}
+
+/* разрез — таймлайн с отметками */
+.timeline{list-style:none;margin:0;padding:0 0 0 150px;position:relative}
+.timeline::before{content:"";position:absolute;left:120px;top:0;bottom:0;width:1px;background:var(--blue);opacity:.5}
+.tl-item{position:relative;margin-bottom:28px}
+.tl-date{position:absolute;left:-150px;top:22px;width:112px;text-align:right;font:500 10.5px/1.5 var(--f-m);color:var(--blue);text-transform:uppercase}
+.tl-date::after{content:"";position:absolute;right:-24px;top:4px;width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-top:9px solid var(--amber)}
+.tl-body{padding:22px 26px;border:1px solid var(--line-2);background:rgba(10,27,46,.7);position:relative;transition:border-color .3s}
+.tl-body:hover{border-color:var(--blue)}
+.tl-kind{font:500 10px var(--f-m);text-transform:uppercase;letter-spacing:.08em;color:var(--dim)}
+.tl-edu .tl-kind{color:var(--amber)}
+.tl-body h3{margin:8px 0 4px;font:500 clamp(17px,1.8vw,22px)/1.3 var(--f-d)}
+.tl-role{font:500 11px var(--f-m);color:var(--blue);text-transform:uppercase;letter-spacing:.04em}
+.tl-sum{margin:12px 0 0;color:#C4D3E6}
+.tl-body ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:7px}
+.tl-body li{padding-left:22px;position:relative;color:var(--muted);font-size:15px}
+.tl-body li::before{content:"";position:absolute;left:0;top:10px;width:10px;height:1px;background:var(--amber)}
+
+/* листы проектов */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+.proj{position:relative;border:1px solid var(--line-2);background:rgba(10,27,46,.75);display:flex;flex-direction:column;transition:border-color .3s,transform .5s var(--ease),opacity .9s var(--ease)}
+.proj.reveal.in:hover{transform:translateY(-6px)}
+.proj:hover{border-color:var(--blue)}
+.proj::before,.proj::after{content:"";position:absolute;width:16px;height:16px;border-color:var(--amber);border-style:solid;opacity:0;transition:opacity .3s,transform .4s var(--ease)}
+.proj::before{top:-6px;left:-6px;border-width:2px 0 0 2px;transform:translate(6px,6px)}
+.proj::after{bottom:-6px;right:-6px;border-width:0 2px 2px 0;transform:translate(-6px,-6px)}
+.proj:hover::before,.proj:hover::after{opacity:1;transform:none}
+.proj.flag:first-child{grid-column:span 2}
+.proj-media{min-height:150px;display:grid;place-items:center;border-bottom:1px solid var(--line);position:relative;overflow:hidden;
+  background-image:linear-gradient(var(--grid-2) 1px,transparent 1px),linear-gradient(90deg,var(--grid-2) 1px,transparent 1px);background-size:20px 20px}
+.proj.flag .proj-media{min-height:200px}
+.proj-code{font:700 30px var(--f-d);color:transparent;-webkit-text-stroke:1px var(--blue);letter-spacing:.02em}
+.pipe{display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:0;padding:20px}
+.pipe span{font:500 11px var(--f-m);text-transform:uppercase;padding:10px 12px;border:1px solid var(--blue);background:var(--bg);white-space:nowrap}
+.pipe span:last-child{border-color:var(--amber);color:var(--amber)}
+.pipe i{width:26px;height:1px;background:var(--blue);position:relative}
+.pipe i::after{content:"";position:absolute;right:-1px;top:-3px;border-left:6px solid var(--blue);border-top:3.5px solid transparent;border-bottom:3.5px solid transparent}
+.proj-info{padding:22px 24px 0;flex:1;display:flex;flex-direction:column}
+.proj-tag{font:500 10.5px var(--f-m);text-transform:uppercase;letter-spacing:.06em;color:var(--amber)}
+.proj-role{margin-top:6px;font:500 10.5px/1.5 var(--f-m);text-transform:uppercase;letter-spacing:.04em;color:var(--blue)}
+.proj h3{margin:10px 0 8px;font:500 18px/1.3 var(--f-d)}
+.proj.flag h3{font-size:clamp(20px,2.2vw,28px)}
+.proj p{margin:0 0 16px;color:var(--muted);font-size:15px}
+.proj-metric{display:inline-flex;gap:12px;align-items:baseline;margin-bottom:16px;border-left:3px solid var(--amber);padding:4px 0 4px 12px}
+.proj-metric b{font:700 20px var(--f-d)}
+.proj-metric span{font:10px var(--f-m);color:var(--muted);text-transform:uppercase}
+.proj-stack{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+.proj-stack span{font:10.5px/1 var(--f-m);padding:6px 7px;border:1px solid var(--line);color:#B4C6DD}
+.proj-more{display:flex;justify-content:space-between;align-items:center;margin:18px -24px 0;padding:12px 24px;border-top:1px solid var(--line);font:500 10.5px var(--f-m);text-transform:uppercase;letter-spacing:.06em;color:var(--blue)}
+.proj-more span{transition:transform .3s var(--ease)}
+.proj:hover .proj-more span{transform:translateX(6px)}
+.minis-head{margin:64px 0 18px}
+.minis{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line-2)}
+.mini{display:flex;flex-direction:column;gap:6px;padding:18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(10,27,46,.5);transition:background .3s}
+.mini:nth-child(4n){border-right:0}
+.mini:nth-last-child(-n+4){border-bottom:0}
+.mini:hover{background:var(--bg-3)}
+.mini b{font:500 14px var(--f-d)}
+.mini span{font-size:14px;color:var(--muted);line-height:1.45}
+.mini small{margin-top:auto;font:10px var(--f-m);color:var(--dim);text-transform:uppercase}
+a.mini small{color:var(--amber)}
+
+/* ведомость достижений */
+.hacks{border:1px solid var(--line-2);background:rgba(10,27,46,.6)}
+.hack{display:grid;grid-template-columns:90px 1fr 240px;border-bottom:1px solid var(--line)}
+.hack:last-child{border-bottom:0}
+.hack > span{padding:18px 20px;border-right:1px solid var(--line)}
+.hack > span:last-child{border-right:0}
+.hack-y{font:500 11px var(--f-m);color:var(--blue)}
+.hack-e{font-size:16px}
+.hack-r{font:500 10.5px var(--f-m);text-transform:uppercase;color:var(--muted)}
+.hack.top{background:rgba(255,181,71,.06)}
+.hack.top .hack-r{color:var(--amber)}
+.hack.top .hack-r::before{content:"★ "}
+
+/* основная надпись — контакты */
+.contact{padding:var(--sec) 0 80px}
+.contact-top{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:end;margin-bottom:40px}
+.contact h2{margin:0;font:700 clamp(36px,6vw,88px)/.95 var(--f-d);text-transform:uppercase;letter-spacing:-.04em}
+.contact h2 span{color:transparent;-webkit-text-stroke:1.5px var(--amber)}
+.contact-top p{grid-column:1/-1;margin:0;color:var(--muted);max-width:56ch}
+.title-block{display:grid;grid-template-columns:repeat(6,1fr);border:2px solid var(--blue);background:rgba(6,18,32,.85)}
+.title-block > div{border-right:1px solid var(--line-2);border-bottom:1px solid var(--line-2);padding:12px 14px;display:flex;flex-direction:column;gap:4px;min-height:68px}
+.title-block .k{font:10px var(--f-m);color:var(--dim);text-transform:uppercase;letter-spacing:.06em}
+.title-block .v{font-size:15px}
+.title-block a.v:hover,.title-block button.v:hover{color:var(--amber)}
+.title-block button{all:unset;cursor:pointer}
+.tb-name{grid-column:span 3;grid-row:span 2;justify-content:center}
+.tb-name .v{font:700 clamp(20px,2.4vw,30px)/1.1 var(--f-d);text-transform:uppercase}
+.tb-sheet{grid-column:span 1}
+.tb-wide{grid-column:span 2}
+.title-block > div:nth-child(6n){border-right:0}
+.foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;padding:24px 0 0;color:var(--dim)}
+
+/* модалка — «лист» */
+.modal{position:fixed;inset:0;z-index:150;display:grid;place-items:center;padding:24px;visibility:hidden;pointer-events:none}
+.modal.open{visibility:visible;pointer-events:auto}
+.modal-bg{position:absolute;inset:0;background:rgba(3,10,18,.75);opacity:0;transition:opacity .4s}
+.modal.open .modal-bg{opacity:1}
+.modal-panel{position:relative;width:min(820px,100%);max-height:88vh;overflow:auto;background:var(--bg-2);border:2px solid var(--blue);padding:clamp(24px,4vw,44px);
+  clip-path:inset(0 0 100% 0);transition:clip-path .7s var(--ease-io)}
+.modal.open .modal-panel{clip-path:inset(0 0 0 0)}
+.modal-x{position:absolute;top:14px;right:14px;width:40px;height:40px;background:var(--bg);border:1px solid var(--line-2);color:var(--text);font-size:13px}
+.modal-x:hover{border-color:var(--amber);color:var(--amber)}
+.m-tag{font:500 10.5px var(--f-m);text-transform:uppercase;letter-spacing:.06em;color:var(--amber)}
+.m-title{margin:12px 44px 14px 0;font:700 clamp(22px,3vw,34px)/1.15 var(--f-d)}
+.m-what{color:#C4D3E6;margin:0 0 22px}
+.m-meta{display:grid;grid-template-columns:repeat(3,1fr);margin:0 0 22px;border:1px solid var(--line-2)}
+.m-meta > div{padding:12px 14px;border-right:1px solid var(--line)}
+.m-meta > div:last-child{border-right:0}
+.m-meta dt{font:10px var(--f-m);color:var(--dim);text-transform:uppercase}
+.m-meta dd{margin:5px 0 0;font-size:15px}
+.m-meta small{font:10px var(--f-m);color:var(--muted)}
+.m-list{list-style:none;margin:0 0 22px;padding:0;display:grid;gap:10px}
+.m-list li{padding-left:24px;position:relative;color:#C4D3E6}
+.m-list li::before{content:"✓";position:absolute;left:0;color:var(--ok);font-size:13px}
+.m-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:24px}
+.m-stack span{font:11px/1 var(--f-m);padding:7px 9px;border:1px solid var(--line-2)}
+.missing{display:inline-block;font:11px var(--f-m);color:var(--amber);border:1px dashed var(--amber);padding:10px 12px}
+
+/* ===================== АДАПТИВ ===================== */
+@media (max-width:1100px){
+  .stats{grid-template-columns:repeat(4,1fr)}
+  .stat{border-bottom:1px solid var(--line)}
+  .stat:nth-child(4){border-right:0}
+  .strengths{grid-template-columns:1fr 1fr}
+  .strength:nth-child(2){border-right:0}
+  .strength:nth-child(-n+2){border-bottom:1px solid var(--line)}
+  .minis{grid-template-columns:repeat(2,1fr)}
+  .mini:nth-child(4n){border-right:1px solid var(--line)}
+  .mini:nth-child(2n){border-right:0}
+  .mini:nth-last-child(-n+4){border-bottom:1px solid var(--line)}
+  .mini:nth-last-child(-n+2){border-bottom:0}
+  .hero-photo{display:none}
+}
+@media (max-width:900px){
+  .nav{position:fixed;top:74px;left:10px;right:10px;flex-direction:column;background:var(--bg);opacity:0;visibility:hidden;transition:.35s var(--ease)}
+  .nav.open{opacity:1;visibility:visible}
+  .nav a{border-right:0;border-bottom:1px solid var(--line);padding:16px;font-size:12px}
+  .burger{display:block}
+  .hero{align-items:flex-end}
+  .hero-3d{width:100%;height:58%;bottom:auto;opacity:.6}
+  .markers{display:none}
+  .about-grid{grid-template-columns:1fr}
+  .avatar-wrap{width:180px;margin:0 auto 20px}
+  .about-text{columns:1}
+  .projects{grid-template-columns:1fr}
+  .proj.flag:first-child{grid-column:auto}
+  .timeline{padding-left:22px}
+  .timeline::before{left:0}
+  .tl-date{position:static;width:auto;text-align:left;margin-bottom:8px}
+  .tl-date::after{display:none}
+  .spec td:nth-child(2){width:auto}
+  .spec th:last-child,.spec td:last-child{display:none}
+  .title-block{grid-template-columns:1fr 1fr}
+  .tb-name,.tb-wide{grid-column:span 2}.tb-name{grid-row:auto}
+  .title-block > div{border-right:1px solid var(--line-2)!important}
+  .title-block > div:nth-child(2n){border-right:0!important}
+  .contact-top{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .frame{inset:6px}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{border-right:1px solid var(--line)!important}
+  .stat:nth-child(2n){border-right:0!important}
+  .stat:last-child{grid-column:span 2}
+  .strengths,.minis{grid-template-columns:1fr}
+  .strength{border-right:0!important;border-bottom:1px solid var(--line)}
+  .mini{border-right:0!important;border-bottom:1px solid var(--line)!important}
+  .hack{grid-template-columns:70px 1fr}.hack-r{grid-column:1/-1;border-top:1px solid var(--line)}
+  .spec td:first-child{display:none}.spec th:first-child{display:none}
+  .sec-head{grid-template-columns:1fr}
+  .sheet-no{justify-self:start}
+  .hero-cta .btn{flex:1 1 auto;justify-content:center}
+  .brand span.t{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+  .intro,.hero-name .line > span,.reveal{opacity:1!important;transform:none!important}
+  .pre-svg path{stroke-dashoffset:0}
+}
+</style>
 </head>
 <body>
-  <canvas id="bg"></canvas>
+<div class="preloader" aria-hidden="true"><div>
+  <svg class="pre-svg" viewBox="0 0 140 120" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M10 110h120M25 110V30h90v80M25 50h90M25 70h90M25 90h90"/><path d="M45 30v80M70 30v80M95 30v80"/><path d="M55 30l15-20 15 20"/></svg>
+  <div class="pre-txt mono">Лист 1 · загрузка чертежа</div></div></div>
+<div class="frame" aria-hidden="true"><i></i><i></i><i></i><i></i><span class="sheet">БАСЕНКО И. · ПОРТФОЛИО · М 1:1</span></div>
+<div class="progress" aria-hidden="true"></div>
 
-  <div class="app">
-    <header class="topbar">
-      <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <div class="brand__text">
-          <div class="brand__name">Иван Басенко</div>
-          <div class="brand__role">Python • ML • NLP/RAG • CV</div>
-        </div>
-      </div>
-
-      <nav class="tabs" aria-label="Разделы">
-        <button class="tab" data-tab="about" aria-controls="panel-about">Обо мне</button>
-        <button class="tab" data-tab="portfolio" aria-controls="panel-portfolio">Портфолио</button>
-        <button class="tab" data-tab="experience" aria-controls="panel-experience">Опыт работы</button>
-        <button class="tab" data-tab="contacts" aria-controls="panel-contacts">Контакты</button>
-        <div class="tabs__glow" aria-hidden="true"></div>
-      </nav>
-    </header>
-
-    <main class="content">
-      <!-- ABOUT -->
-      <section class="panel" id="panel-about" data-panel="about" role="region" aria-label="Обо мне">
-        <div class="grid">
-          <div class="card hero">
-            <div class="hero__top">
-              <div class="chip">Junior+ Python Developer</div>
-              <div class="chip chip--ghost">Москва • Remote/Hybrid</div>
-            </div>
-
-            <h1 class="h1">
-              Делаю <span class="neon">продукты на Python</span> — от идеи до MVP и сопровождения
-            </h1>
-
-            <p class="lead">
-              Опыт в машинном обучении и анализе данных в производственной сфере:
-              классический ML, DL, NLP/RAG и Computer Vision. Люблю понятные пайплайны,
-              аккуратный код и измеримые метрики.
-            </p>
-
-            <div class="hero__stats">
-              <div class="stat">
-                <div class="stat__k">1 год</div>
-                <div class="stat__v">коммерческого опыта</div>
-              </div>
-              <div class="stat">
-                <div class="stat__k">RAG / NLP</div>
-                <div class="stat__v">LangChain, HF, OpenAI API</div>
-              </div>
-              <div class="stat">
-                <div class="stat__k">Deploy</div>
-                <div class="stat__v">Docker, FastAPI, CI/CD</div>
-              </div>
-            </div>
-
-            <div class="cta">
-              <a class="btn" href="#contacts" data-jump="contacts">Связаться</a>
-              <a class="btn btn--ghost" href="https://github.com/Ivanqo" target="_blank" rel="noopener">GitHub</a>
-            </div>
-          </div>
-
-          <div class="card">
-            <h2 class="h2">Стек и навыки</h2>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">SQL</span>
-              <span class="tag">FastAPI</span>
-              <span class="tag">Flask</span>
-              <span class="tag">Docker</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Git</span>
-              <span class="tag">CI/CD</span>
-              <span class="tag">Pandas</span>
-              <span class="tag">NumPy</span>
-              <span class="tag">scikit-learn</span>
-              <span class="tag">XGBoost</span>
-              <span class="tag">LightGBM</span>
-              <span class="tag">PyTorch</span>
-              <span class="tag">TensorFlow</span>
-              <span class="tag">OpenCV</span>
-              <span class="tag">Hugging Face</span>
-              <span class="tag">LangChain</span>
-              <span class="tag">Swagger</span>
-              <span class="tag">Markdown/Sphinx</span>
-            </div>
-
-            <div class="divider"></div>
-
-            <h2 class="h2">Образование</h2>
-            <p class="p">
-              НИУ МГСУ (Москва) — 3 курс, «Информационные системы и технологии в строительстве»
-              (2023–2027).
-            </p>
-
-            <div class="divider"></div>
-
-            <h2 class="h2">Языки</h2>
-            <p class="p">Английский — B2.</p>
-          </div>
-        </div>
-
-        <div class="card wide">
-          <h2 class="h2">О чём этот сайт</h2>
-          <p class="p">
-            Это короткая «витрина» проектов и опыта. Ниже — портфолио с репозиториями,
-            далее — таймлайн работы и контакты.
-          </p>
-          <div class="hint">
-            <span class="kbd">Tab</span> / <span class="kbd">←</span> <span class="kbd">→</span>
-            — переключение разделов
-          </div>
-        </div>
-      </section>
-
-      <!-- PORTFOLIO -->
-      <section class="panel" id="panel-portfolio" data-panel="portfolio" role="region" aria-label="Портфолио">
-        <div class="card wide">
-          <h2 class="h2">Портфолио</h2>
-          <p class="p">
-            Подборка проектов из резюме. Репозитории открываются в новой вкладке.
-          </p>
-        </div>
-
-        <div class="cards">
-          <article class="card project">
-            <div class="project__head">
-              <h3 class="h3">Web приложение НИУ МГСУ (PWA)</h3>
-              <a class="link" href="https://github.com/Ivanqo/web_app" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-            <p class="p">
-              Участие в разработке PWA для университета: авторизация, CRUD для новостей и расписания,
-              адаптивный интерфейс, работа с БД через Django ORM.
-            </p>
-            <div class="tags">
-              <span class="tag">Django</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Pillow</span>
-              <span class="tag">PWA</span>
-            </div>
-          </article>
-
-          <article class="card project">
-            <div class="project__head">
-              <h3 class="h3">Telegram-бот регистрации на мероприятия</h3>
-              <a class="link" href="https://t.me/MGSU_registr_bot" target="_blank" rel="noopener">Открыть →</a>
-            </div>
-            <p class="p">
-              Бот на telebot: создание/запись на мероприятия, хранение в PostgreSQL,
-              выгрузка списков участников в Excel, генерация постов через ChatGPT API.
-            </p>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">telebot</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">pandas</span>
-              <span class="tag">psycopg2</span>
-            </div>
-          </article>
-
-          <article class="card project">
-            <div class="project__head">
-              <h3 class="h3">Обработчик фотографий (1600+)</h3>
-              <a class="link" href="https://github.com/Ivanqo/photo_processing" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-            <p class="p">
-              Автоматическая обработка фото: удаление фона, коррекция освещения, улучшение качества.
-              Среднее время обработки — ~15 секунд на фото. Использовалось для материалов сборных команд.
-            </p>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">OpenCV</span>
-              <span class="tag">Pillow</span>
-              <span class="tag">rembg</span>
-            </div>
-          </article>
-
-          <article class="card project">
-            <div class="project__head">
-              <h3 class="h3">Интерфейс на Python (Flet, 48 часов)</h3>
-              <span class="muted">Хакатон</span>
-            </div>
-            <p class="p">
-              Прототип full‑stack интерфейса на Flet: интерактивные элементы управления и визуализация данных.
-            </p>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">Flet</span>
-              <span class="tag">UI</span>
-            </div>
-          </article>
-
-          <article class="card project">
-            <div class="project__head">
-              <h3 class="h3">Парсер Wildberries</h3>
-              <a class="link" href="https://github.com/Ivanqo/Parsing.git" target="_blank" rel="noopener">GitHub →</a>
-            </div>
-            <p class="p">
-              Сбор данных о товарах (цены, рейтинги) и экспорт в CSV.
-            </p>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">requests</span>
-              <span class="tag">csv</span>
-              <span class="tag">парсинг</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- EXPERIENCE -->
-      <section class="panel" id="panel-experience" data-panel="experience" role="region" aria-label="Опыт работы">
-        <div class="card wide">
-          <h2 class="h2">Опыт работы</h2>
-          <p class="p">
-            Таймлайн по ключевым задачам: автоматизация, ETL, NLP/RAG, CV и полный цикл MVP.
-          </p>
-        </div>
-
-        <div class="timeline">
-          <div class="card job">
-            <div class="job__meta">
-              <div class="job__org">НИУ МГСУ — Институт Физической Культуры и Спорта</div>
-              <div class="job__date">18.02.2025 — 30.06.2025 • 3 месяца</div>
-            </div>
-            <h3 class="h3">Автоматизация учёта мероприятий</h3>
-            <ul class="list">
-              <li>Разработка Telegram‑бота для автоматизации учёта посещаемости.</li>
-              <li>Отслеживание по геолокации + система отметок онлайн.</li>
-            </ul>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">telebot</span>
-              <span class="tag">Telegram</span>
-            </div>
-          </div>
-
-          <div class="card job">
-            <div class="job__meta">
-              <div class="job__org">Росатом — Возобновляемая Энергия</div>
-              <div class="job__date">16.06.2025 — н.в. • 6+ месяцев</div>
-            </div>
-            <h3 class="h3">Data/ML Engineer: пайплайны, RAG, CV</h3>
-            <ul class="list">
-              <li>Обработка и анализ табличных данных для предсказательных моделей.</li>
-              <li>Создание ETL‑пайплайнов для Big Data.</li>
-              <li>NLP: чат‑боты и RAG‑пайплайны.</li>
-              <li>Computer Vision: модели CV для учебных и прикладных задач.</li>
-              <li>Полный цикл: идея → прототип → деплой MVP → сопровождение.</li>
-              <li>Эксплуатационная документация и инструкции.</li>
-            </ul>
-            <div class="tags">
-              <span class="tag">Python</span>
-              <span class="tag">PostgreSQL</span>
-              <span class="tag">Docker</span>
-              <span class="tag">NLP/RAG</span>
-              <span class="tag">OpenCV</span>
-              <span class="tag">Документация</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card wide">
-          <h2 class="h2">Курсы</h2>
-          <ul class="list">
-            <li>SQL (Stepik): интерактивный тренажёр — от SELECT до JOIN и вложенных запросов.</li>
-            <li>Python (Bioinformatics Institute, Stepik): базовые и продвинутые темы, работа с библиотеками.</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- CONTACTS -->
-      <section class="panel" id="panel-contacts" data-panel="contacts" role="region" aria-label="Контакты">
-        <div class="grid">
-          <div class="card">
-            <h2 class="h2">Контакты</h2>
-            <div class="contact">
-              <div class="contact__k">Телефон</div>
-              <a class="contact__v" href="tel:+79614016079">+7&nbsp;961&nbsp;401‑60‑79</a>
-            </div>
-            <div class="contact">
-              <div class="contact__k">Email</div>
-              <a class="contact__v" href="mailto:ivan.basenko.05@mail.ru">ivan.basenko.05@mail.ru</a>
-            </div>
-            <div class="contact">
-              <div class="contact__k">GitHub</div>
-              <a class="contact__v" href="https://github.com/Ivanqo" target="_blank" rel="noopener">github.com/Ivanqo</a>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="cta">
-              <a class="btn" href="mailto:ivan.basenko.05@mail.ru?subject=Связаться%20по%20лендингу%20(Иван%20Басенко)">Написать письмо</a>
-              <a class="btn btn--ghost" href="https://t.me/" target="_blank" rel="noopener">Telegram (укажи)</a>
-            </div>
-
-            <p class="note">
-              Подсказка: открой <span class="kbd">styles.css</span> и замени ссылки/тексты (например Telegram),
-              если нужно.
-            </p>
-          </div>
-
-          <div class="card">
-            <h2 class="h2">Быстрая настройка GitHub Pages</h2>
-            <ol class="ol">
-              <li>Создай репозиторий <span class="kbd">ivanqo.github.io</span> (или используй существующий).</li>
-              <li>Залей содержимое этого архива в корень репозитория.</li>
-              <li>GitHub → Settings → Pages → Deploy from a branch → <span class="kbd">main</span>, <span class="kbd">/(root)</span>.</li>
-              <li>Открой <span class="kbd">https://ivanqo.github.io</span>.</li>
-            </ol>
-
-            <div class="divider"></div>
-
-            <h2 class="h2">Хобби</h2>
-            <p class="p">Фантастические сериалы, автомобили и игры (сюжетные и онлайн).</p>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="footer__left">
-        <span class="dot"></span>
-        <span>Built with HTML/CSS/JS • Cyberpunk UI</span>
-      </div>
-      <div class="footer__right">
-        <a class="link" href="#about" data-jump="about">↑ Наверх</a>
-      </div>
-    </footer>
+<header class="hdr">
+  <div class="wrap">
+    <a class="brand" href="#top"><img class="ph-xs" src="assets/avatar-sm.webp" alt="" width="32" height="32"><span class="t">Басенко И.</span></a>
+    <nav class="nav" id="nav" aria-label="Разделы">
+      <a href="#about">01 Обо мне</a><a href="#skills">02 Стек</a><a href="#experience">03 Опыт</a><a href="#projects">04 Проекты</a><a href="#awards">05 Достижения</a><a href="#contact">06 Контакты</a>
+    </nav>
+    <button class="burger" aria-label="Меню" aria-expanded="false" aria-controls="nav">Разделы ▾</button>
   </div>
+</header>
 
-  <script src="app.js"></script>
+<main id="top">
+  <section class="hero">
+    <div class="hero-3d" aria-hidden="true"><canvas id="gl"></canvas><div class="markers" id="markers"></div></div>
+    <div class="wrap" style="width:100%">
+      <div class="hero-text">
+        <div class="stamp mono intro" style="--d:100ms"><span>Лист 00</span><span>Титульный</span><span>● Открыт к предложениям</span></div>
+        <h1 class="hero-name"><span class="line"><span style="--d:220ms">Иван</span></span><span class="line"><span style="--d:340ms">Басенко</span></span></h1>
+        <p class="hero-role mono intro" style="--d:480ms" data-scramble="AI / ML Engineer · Python">AI / ML Engineer · Python</p>
+        <p class="hero-tag intro" style="--d:560ms">Учу машины читать, проверять и&nbsp;<mark>сверять</mark> документы.</p>
+        <p class="hero-pitch intro" style="--d:640ms" id="pitch"></p>
+        <div class="hero-cta intro" style="--d:720ms">
+          <a class="btn btn-primary magnetic" href="https://t.me/vanilqaa" target="_blank" rel="noopener">Написать в Telegram →</a>
+          <a class="btn magnetic" href="resume.pdf" download>Резюме <small>PDF</small></a>
+          <a class="btn magnetic" href="https://github.com/Ivanqo" target="_blank" rel="noopener">GitHub ↗</a>
+        </div>
+      </div>
+    </div>
+    <figure class="hero-photo intro" style="--d:800ms">
+      <picture><source srcset="assets/portrait.webp" type="image/webp"><img src="assets/portrait.jpg" alt="Иван Басенко" width="800" height="1000" fetchpriority="high"></picture>
+      <figcaption class="mono"><span>Фото · автор</span><span>М 1:1</span></figcaption>
+    </figure>
+  </section>
+
+  <section aria-label="Ведомость показателей"><div class="wrap"><div class="stats" id="stats"></div>
+    <div class="stats-cap mono"><span>Ведомость показателей</span><span>Данные: 2026</span></div></div></section>
+
+  <section class="sec" id="about">
+    <div class="wrap">
+      <header class="sec-head reveal"><span class="sheet-no">Лист 01</span><h2 data-scramble="Пояснительная записка">Пояснительная записка</h2></header>
+      <div class="about-grid">
+        <div><div class="avatar-wrap reveal"><figure class="avatar"><picture><source srcset="assets/avatar.webp" type="image/webp"><img src="assets/avatar.jpg" alt="Иван Басенко" width="600" height="600" loading="lazy"></picture></figure></div>
+          <div class="avatar-cap mono">Ø 600 · узел «автор»</div></div>
+        <div class="about-text" id="about-text"></div>
+      </div>
+      <div class="strengths" id="strengths"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="skills">
+    <div class="wrap">
+      <header class="sec-head reveal"><span class="sheet-no">Лист 02</span><h2 data-scramble="Спецификация стека">Спецификация стека</h2>
+        <p>Жёлтым отмечено ядро — технологии, которые использую чаще всего.</p></header>
+      <div class="filter reveal" role="group" aria-label="Фильтр навыков"><button aria-pressed="true" data-f="all">Все позиции</button><button aria-pressed="false" data-f="core">Только ядро</button></div>
+      <table class="spec reveal" id="spec"><thead><tr><th>Поз.</th><th>Раздел</th><th>Наименование</th><th>Прим.</th></tr></thead><tbody></tbody></table>
+    </div>
+  </section>
+
+  <section class="sec" id="experience">
+    <div class="wrap">
+      <header class="sec-head reveal"><span class="sheet-no">Лист 03</span><h2 data-scramble="Разрез 1-1: опыт">Разрез 1-1: опыт</h2></header>
+      <ol class="timeline" id="timeline"></ol>
+    </div>
+  </section>
+
+  <section class="sec" id="projects">
+    <div class="wrap">
+      <header class="sec-head reveal"><span class="sheet-no">Лист 04</span><h2 data-scramble="Комплект проектов">Комплект проектов</h2>
+        <p>Каждая карточка — отдельный лист. Нажмите, чтобы развернуть.</p></header>
+      <div class="projects" id="projects-grid"></div>
+      <div class="minis-head mono reveal amb">Приложение А · мини-проекты</div>
+      <div class="minis" id="minis"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="awards">
+    <div class="wrap">
+      <header class="sec-head reveal"><span class="sheet-no">Лист 05</span><h2 data-scramble="Ведомость достижений">Ведомость достижений</h2></header>
+      <div class="hacks reveal" id="hacks"></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <div class="contact-top reveal">
+        <h2>Согласуем<br><span>встречу?</span></h2>
+        <a class="btn btn-primary magnetic" href="https://t.me/vanilqaa" target="_blank" rel="noopener">Написать в Telegram →</a>
+        <p>Открыт к предложениям AI / ML Engineer и Python-разработчика в Document AI. Отвечаю быстро.</p>
+      </div>
+      <div class="title-block reveal">
+        <div class="tb-name"><span class="k">Автор</span><span class="v">Иван Басенко</span><span class="k" style="margin-top:6px">AI / ML Engineer · Python</span></div>
+        <div class="tb-wide"><span class="k">Telegram</span><a class="v" href="https://t.me/vanilqaa" target="_blank" rel="noopener">@vanilqaa</a></div>
+        <div class="tb-sheet"><span class="k">Лист</span><span class="v">06</span></div>
+        <div class="tb-wide"><span class="k">E-mail</span><button class="v" data-copy="ivan.basenko.05@mail.ru"><span class="copy-label">ivan.basenko.05@mail.ru</span></button></div>
+        <div class="tb-sheet"><span class="k">Листов</span><span class="v">06</span></div>
+        <div class="tb-wide"><span class="k">GitHub</span><a class="v" href="https://github.com/Ivanqo" target="_blank" rel="noopener">github.com/Ivanqo</a></div>
+        <div class="tb-wide"><span class="k">Сайт</span><a class="v" href="https://ivanqo.github.io" target="_blank" rel="noopener">ivanqo.github.io</a></div>
+        <div class="tb-wide"><span class="k">Локация</span><span class="v">Москва · гибрид / удалёнка</span></div>
+        <div class="tb-wide" style="border-right:0"><span class="k">Командировки</span><span class="v">Готов</span></div>
+        <div class="tb-wide"><span class="k">Организация</span><span class="v">НИУ МГСУ · ИСТ в строительстве</span></div>
+        <div class="tb-wide"><span class="k">Стадия</span><span class="v amb">Открыт к предложениям</span></div>
+      </div>
+      <footer class="foot mono"><span>© <span data-year></span> Иван Басенко</span><span>Python · Document AI</span><a href="#top">К титульному листу ↑</a></footer>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* Контент сайта — единый источник для всех трёх концепций (из Ivan_Basenko_site_content.md).
+   "*" в начале навыка = ядро (технологии, которые использую чаще всего, по MD). */
+const DATA = {
+  name: "Иван Басенко",
+  first: "Иван",
+  last: "Басенко",
+  nameEn: "Ivan Basenko",
+  role: "AI / ML Engineer · Python",
+  tagline: "Учу машины читать, проверять и сверять документы.",
+  taglineEn: "I teach machines to read, verify and cross-check documents.",
+  tags: ["Document AI", "LLM & RAG", "OCR", "Backend", "Full Cycle"],
+  pitch: "Строю ИИ-системы для строительной документации — от OCR тысяч страниц PDF до сервисов, которыми ежедневно пользуются эксперты.",
+  links: {
+    tg: "https://t.me/vanilqaa",
+    tgHandle: "@vanilqaa",
+    gh: "https://github.com/Ivanqo",
+    ghHandle: "github.com/Ivanqo",
+    email: "ivan.basenko.05@mail.ru",
+    site: "https://ivanqo.github.io",
+    resume: "resume.pdf" /* лежит в корне рядом с index.html */
+  },
+  location: "Москва · гибрид / удалёнка · готов к командировкам",
+  status: "Открыт к предложениям AI / ML Engineer и Python-разработчика в Document AI",
+
+  stats: [
+    { num: 1.5, dec: 1, suffix: "+", unit: "года", label: "коммерческой разработки" },
+    { num: 800, prefix: "~", label: "коммитов в продакшн-платформе" },
+    { num: 8, suffix: "+", label: "сервисов в системе, над которой работаю" },
+    { num: 132, label: "параметра сверки в ИИ-инспекторе" },
+    { num: 0.958, dec: 3, label: "точность извлечения текста из PDF" },
+    { num: 15, suffix: "+", label: "проектов на Python" },
+    { text: "Финал", label: "ЛЦТ 2026" }
+  ],
+
+  about: [
+    "Я Python-разработчик в прикладном ИИ. Моя специализация — **документоориентированный ИИ**: OCR, RAG, извлечение сущностей, сверка документов, BIM/IFC.",
+    "Сейчас в ГАУ МО «Мособлгосэкспертиза» разрабатываю платформу автоматизации государственной экспертизы проектной документации: приём комплектов, извлечение метаданных из PDF/XML/ЭЦП, автоматические проверки и формирование замечаний для экспертов.",
+    "Работаю полным циклом: собираю требования и пишу ТЗ, проектирую архитектуру, пишу backend и интерфейсы, настраиваю Docker и CI/CD, документирую. Люблю, когда результат можно измерить: считаю метрики, проверяю статистическую значимость и честно фиксирую ограничения — даже если результат отрицательный.",
+    "Учусь на 4 курсе НИУ МГСУ по направлению «Информационные системы и технологии в строительстве» — поэтому хорошо понимаю предметную область: проектная, рабочая и исполнительная документация, сметы, BIM."
+  ],
+
+  strengths: [
+    { t: "Полный цикл", d: "От постановки задачи и данных до CI/CD, Docker-деплоя и документации." },
+    { t: "Document AI", d: "OCR, RAG, извлечение сущностей, сверка документов, BIM/IFC. Повторяющаяся специализация во всех крупных проектах." },
+    { t: "Инженерная честность", d: "Явные состояния «нет данных / сравнение невозможно» вместо ложных срабатываний, воспроизводимость, измерения, задокументированные отрицательные результаты." },
+    { t: "Командная разработка", d: "Крупный монорепозиторий, MR-процесс, интеграция нескольких сервисов, параллельная работа над десятками задач." }
+  ],
+
+  skills: [
+    { group: "AI / LLM / NLP", items: ["*LLM (Qwen3, Qwen API, OpenAI API)", "*RAG", "Промптинг и JSON-схемы", "sentence-transformers", "Эмбеддинги", "Chroma", "LangChain", "Hugging Face", "spaCy"] },
+    { group: "Document AI", items: ["*Tesseract OCR", "PyMuPDF", "pdfplumber", "Извлечение таблиц", "Классификация документов", "lxml / XSD / XPath", "IFC/BIM (ifcopenshell)"] },
+    { group: "ML / Data", items: ["CatBoost", "scikit-learn", "PyTorch", "TensorFlow (LSTM)", "SARIMAX", "pandas", "Polars", "NumPy", "P/R/F1, out-of-sample"] },
+    { group: "Backend", items: ["*Python 3.12", "*FastAPI", "*Django 5 + DRF", "SQLAlchemy 2 (async)", "Alembic", "Celery", "RabbitMQ", "Redis", "aiogram", "REST / OpenAPI", "SSE"] },
+    { group: "Базы данных", items: ["*PostgreSQL", "SQLite", "ClickHouse", "Chroma"] },
+    { group: "DevOps", items: ["*Docker / Compose", "GitLab CI", "GitHub Actions", "nginx", "Linux (Ubuntu, WSL)", "pytest", "mypy", "ruff"] },
+    { group: "Frontend", items: ["React 18", "TypeScript", "Vite", "Tailwind", "Streamlit"] }
+  ],
+
+  experience: [
+    {
+      period: "апр 2026 — н.в.", org: "ГАУ МО «Мособлгосэкспертиза»", role: "Python / AI-разработчик",
+      summary: "Платформа автоматизации государственной экспертизы проектной документации (8+ сервисов, командная разработка).",
+      bullets: [
+        "~800 коммитов в основном сервисе приёма и чек-листов (Django + DRF + PostgreSQL, React 18): автоматические проверки полноты и согласованности документации, версионирование проектов, ошибки пайплайна, отчёты.",
+        "Создал с нуля сервис экспертизы: получение версий файлов из внешней системы, оркестрация обработки, интерфейс эксперта, пакеты замечаний.",
+        "Написал сервис извлечения метаданных из PDF / XML / ЭЦП с устойчивой очередью задач.",
+        "Участвовал в разработке парсера документов (OCR, классификация, LLM), сервиса сверки XML и редактора XSD-маппинга.",
+        "CI/CD на Docker и GitLab CI, nginx; архитектурный документ по всей системе."
+      ]
+    },
+    {
+      period: "июн 2025 — апр 2026", org: "Росатом Возобновляемая Энергия", role: "Аналитик данных (ML / NLP)",
+      summary: "",
+      bullets: [
+        "RAG-ассистент по закупочной и нормативной документации: retrieval + LLM (Qwen), ответы строго по найденному контексту, SSE-стриминг, оценки ответов.",
+        "FAQ-бот ИТ-сервиса: интенты из Excel, ответы за доли миллисекунды, векторное сопоставление, уточняющие вопросы.",
+        "ETL на Python + PostgreSQL с ежедневным / еженедельным / ежемесячным обновлением и проверками качества.",
+        "Аналитика ветрогенерации: обледенение 38 турбин, инструмент проверки 10-минутных агрегатов.",
+        "Сбор требований и ТЗ по платформе аналитики Triafly; деплой MVP (Docker, Ubuntu, nginx) и поддержка."
+      ]
+    },
+    {
+      period: "фев 2025 — июн 2025", org: "НИУ МГСУ, Институт физической культуры и спорта", role: "Python-разработчик",
+      summary: "",
+      bullets: ["Telegram-бот учёта посещаемости и регистрации на мероприятия: онлайн-отметки с проверкой геолокации."]
+    }
+  ],
+
+  education: {
+    period: "2023 — 2027", org: "НИУ МГСУ", role: "Бакалавриат · 4 курс",
+    summary: "«Информационные системы и технологии в строительстве»"
+  },
+  courses: [
+    "Stepik — «Интерактивный тренажёр по SQL»",
+    "Stepik — «Программирование на Python» (Bioinformatics Institute)",
+    "Английский — B2"
+  ],
+
+  /* role: заполнено только там, где роль явно указана в данных */
+  projects: [
+    {
+      flag: true, code: "LCT-10", role: "Тимлид + ML-инженер · команда из 2 человек", title: "ИИ-инспектор — сверка ПД, РД и ИД по 132 параметрам",
+      tag: "Хакатон ЛЦТ 2026 · финал", year: "2026",
+      what: "Локальный сервис, который сравнивает рабочую и исполнительную документацию с проектной и находит расхождения с доказательствами.",
+      bullets: [
+        "Тысячи страниц PDF → реестр редакций → текст, OCR, таблицы → кандидаты нарушений → карточка инспектора → протокол PDF / JSON / DOCX / XML.",
+        "LLM-верификатор на Qwen3-4B: качество ранжирования 0,386 → 0,525 (p = 0,0094).",
+        "Работает полностью без сети (--network none), результат побайтно воспроизводим; стенд на 173 тройках документов с метриками P/R/F1."
+      ],
+      metric: { v: "0,386 → 0,525", l: "ранжирование, p = 0,0094" },
+      stack: ["FastAPI", "React 18", "Node.js", "RabbitMQ", "Tesseract", "sentence-transformers", "Qwen3-4B", "PyTorch", "Docker"],
+      link: "https://github.com/Ivanqo/LCT-2026-10case", pipeline: ["PDF", "OCR", "Извлечение", "Сверка", "Протокол"]
+    },
+    {
+      flag: true, code: "GOS-EXP", role: "AI-разработчик", title: "Платформа автоматизации госэкспертизы проектной документации",
+      tag: "Работа · 2026", year: "2026",
+      what: "Система из 8+ сервисов для приёма и экспертизы комплектов проектной документации.",
+      bullets: [
+        "Автоматические проверки полноты и согласованности, чек-листы, пакеты замечаний.",
+        "Извлечение метаданных из PDF / XML / ЭЦП, OCR, сверка XML-файлов.",
+        "~800 личных коммитов, один сервис создан с нуля."
+      ],
+      metric: { v: "~800", l: "личных коммитов" },
+      stack: ["Django 5", "DRF", "FastAPI", "PostgreSQL", "React 18", "TypeScript", "lxml", "Tesseract", "Docker", "GitLab CI"],
+      link: null, private: true, pipeline: ["Приём", "Метаданные", "Проверки", "Замечания"]
+    },
+    {
+      flag: true, code: "BIM-RAG", role: "ML-инженер", title: "ИИ-помощник по проектной документации и BIM",
+      tag: "Pet / R&D · 2026", year: "2026",
+      what: "RAG по проектной документации + быстрые запросы к IFC-моделям.",
+      bullets: [
+        "Три независимых сервиса: API, RAG (PDF/DOCX → Chroma → LLM), IFC (import → index → запросы).",
+        "Фоновые задачи на Celery + Redis, CPU-only PyTorch.",
+        "Стал фундаментом для ИИ-инспектора на ЛЦТ."
+      ],
+      stack: ["FastAPI", "ifcopenshell", "Chroma", "Celery", "Redis", "PostgreSQL", "Docker Compose"],
+      link: null, pipeline: ["PDF/DOCX", "Chroma", "LLM", "IFC"]
+    },
+    {
+      code: "RAG-PROC", role: "AI-разработчик", title: "RAG-ассистент по закупкам", tag: "Работа · 2026", year: "2026",
+      what: "Чат-помощник по закупочной и нормативной документации.",
+      bullets: ["Retrieval + LLM с ответами строго в рамках найденного контекста.", "SSE-стриминг, база знаний с индексацией, оценки ответов, метрики.", "Расчёт сроков закупки по Excel-шаблону."],
+      stack: ["FastAPI", "SQLAlchemy", "SSE", "RAG", "Qwen"], link: null, private: true
+    },
+    {
+      code: "DF-26", role: "ML-инженер · соло", title: "Data Fusion 2026 — банковский ML", tag: "Соревнование · 2026", year: "2026",
+      what: "Две задачи соревнования: антифрод и ранжирование продуктов.",
+      bullets: ["Антифрод: 100 тыс. клиентов, графовые признаки и эмбеддинги, CatBoost на GPU.", "Ранжирование 41 продукта на 1 млн клиентов: multi-label CatBoost + specialist-модели, blending.", "Оптимизация обучения под ПК с 16 ГБ RAM."],
+      stack: ["Python", "Polars", "pandas", "CatBoost"], link: null
+    },
+    {
+      code: "UNIPATH", role: "Тимлид + fullstack · команда из 3 человек", title: "UniPath MAX — карьерный навигатор студента", tag: "Хакатон MAX · 2026", year: "2026",
+      what: "Карьерный навигатор для студентов НИУ МГСУ внутри MAX Mini App.",
+      bullets: ["Профиль и навыки → Career GPS → каталог возможностей → поиск по базе знаний вуза.", "Django/DRF с мультитенантностью, два SPA на React + TS, интеграция MAX Mini App, 36 backend-тестов.", "Гипотеза построена на 15 интервью со студентами НИУ МГСУ."],
+      stack: ["Django", "DRF", "React", "TypeScript", "Tailwind", "Vitest", "Docker", "nginx"], link: null
+    },
+    {
+      code: "MOEX-RD", role: "Разработчик · соло", title: "Исследование торговых стратегий и скринер MOEX", tag: "R&D", year: "",
+      what: "Интрадей-платформа и стенд проверки гипотез с честным отрицательным результатом.",
+      bullets: ["Интрадей-платформа: T-Invest API, бэктест, paper-брокер, риск-менеджер, FastAPI-дашборд.", "Стенд проверки гипотез на 2 годах 15-минутных свечей: out-of-sample, forward-протокол, независимый аудит.", "Прибыльная стратегия не найдена — отрицательный результат задокументирован и воспроизводим."],
+      stack: ["Python", "pandas", "FastAPI", "SQLAlchemy", "PostgreSQL", "pytest"], link: null
+    },
+    {
+      code: "NEWS-BOT", role: "Разработчик · соло", title: "Market News Bot", tag: "Pet", year: "",
+      what: "Сбор рыночных новостей из 20 источников с LLM-анализом и рассылкой в Telegram.",
+      bullets: ["Асинхронный опрос 20 источников (RSS/HTML/JSON-LD, ETag, robots.txt, backoff), дедупликация.", "LLM-анализ новости с JSON-схемой, Pydantic-валидацией и repair-запросом.", "Определение тикеров, рассылка подписчикам в Telegram."],
+      stack: ["aiogram", "asyncio", "Pydantic", "Docker"], link: null
+    },
+    {
+      code: "MGSU-BOOK", role: "Fullstack · команда из 5 человек: тесты и часть аналитики сервиса", title: "Система бронирования переговорных НИУ МГСУ", tag: "Командный проект · в продакшене", year: "",
+      what: "Аналитика бронирований переговорных для университета.",
+      bullets: ["API аналитики бронирований (месяц, день недели, комната, статус, доступные минуты).", "Страница аналитики с дашбордами и рекомендациями (React + TS).", "Ограничения активных броней, hurl-тесты API."],
+      stack: ["FastAPI", "SQLAlchemy 2 (async)", "PostgreSQL", "React", "TypeScript"], link: null
+    },
+    {
+      code: "LEADGEN", role: "Разработчик · соло", title: "Агент лидогенерации для стройотрасли", tag: "Pet", year: "",
+      what: "Поиск и объяснимый скоринг компаний стройотрасли по открытым источникам.",
+      bullets: ["Источники ФНС/ЕГРЮЛ и CSV, обогащение (ИНН, ОКВЭД), поиск контактов, объяснимый скоринг.", "Оркестрация с чекпоинтами и возобновлением, метрики, precision@k.", "Alembic, GitHub Actions (ruff, mypy, тесты на PostgreSQL), runbook."],
+      stack: ["Python 3.12", "SQLAlchemy", "PostgreSQL", "uv", "pytest", "mypy"], link: null
+    }
+  ],
+
+  minis: [
+    { t: "IFC Voice", d: "Голосовое управление BIM-моделью", s: "spaCy · fastembed · PyInstaller" },
+    { t: "AtomSkills · 3 место", d: "Прогнозирование LSTM / SARIMAX / Random Forest + Streamlit-панель", s: "TensorFlow · Streamlit · 2026" },
+    { t: "OLTP → OLAP", d: "PostgreSQL → ClickHouse для строительных смет и актов", s: "PostgreSQL · ClickHouse" },
+    { t: "Harmoniks", d: "Музыкальная соцсеть", s: "Flutter · Kotlin" },
+    { t: "EnergDobra", d: "ИИ-бот контент-планов для НКО (хакатон «Энергия добра»)", s: "LLM · Telegram" },
+    { t: "Photo processing", d: "Пакетная обработка 1600+ фото, ~15 с/фото", s: "OpenCV · rembg", link: "https://github.com/Ivanqo/photo_processing" },
+    { t: "Бот мероприятий МГСУ", d: "Регистрация, экспорт в Excel, LLM для постов", s: "PostgreSQL · LLM" },
+    { t: "Агрегатор хакатонов", d: "Сбор из Telegram / RSS / HTML", s: "Streamlit" }
+  ],
+
+  hacks: [
+    { e: "Лидеры цифровой трансформации, кейс №10 «ИИ-инспектор»", y: "2026", r: "Финал", top: true },
+    { e: "AtomSkills — направление «Машинное обучение и большие данные»", y: "2026", r: "3 место", top: true },
+    { e: "ВТБ-Дебаты", y: "2025", r: "Победитель", top: true },
+    { e: "Хакатон MAX — UniPath MAX", y: "2026", r: "Прототип + демо" },
+    { e: "Data Fusion 2026 (антифрод, ранжирование продуктов)", y: "2026", r: "Участие в двух задачах" },
+    { e: "«Энергия добра»", y: "2026", r: "ИИ-бот для НКО" }
+  ]
+};
+
+/* ===== Общая логика: рендер контента, reveal, счётчики, курсор, модалка ===== */
+const RM = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const TOUCH = window.matchMedia('(hover: none), (pointer: coarse)').matches;
+const MOBILE = () => window.innerWidth < 760;
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const md = s => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+const fmt = (n, d) => n.toFixed(d || 0).replace('.', ',');
+const skillName = s => s.replace(/^\*/, '');
+const isCore = s => s.charAt(0) === '*';
+const shortSkill = s => skillName(s).replace(/\s*\(.*\)/, '');
+
+const UI = {
+  stats(el, cls = 'stat') {
+    el.innerHTML = DATA.stats.map((s, i) => `
+      <div class="${cls} reveal" style="--d:${i * 70}ms">
+        <div class="${cls}-v">${s.text ? esc(s.text)
+          : `${s.prefix || ''}<span class="count" data-to="${s.num}" data-dec="${s.dec || 0}">${fmt(0, s.dec)}</span>${s.suffix || ''}`}${s.unit ? `<small> ${esc(s.unit)}</small>` : ''}</div>
+        <div class="${cls}-l">${esc(s.label)}</div>
+      </div>`).join('');
+  },
+  about(el) { el.innerHTML = DATA.about.map((p, i) => `<p class="reveal" style="--d:${i * 90}ms">${md(p)}</p>`).join(''); },
+  strengths(el) {
+    el.innerHTML = DATA.strengths.map((s, i) => `
+      <article class="strength reveal" style="--d:${i * 90}ms">
+        <span class="strength-n">0${i + 1}</span><h3>${esc(s.t)}</h3><p>${esc(s.d)}</p>
+      </article>`).join('');
+  },
+  skillGroups(el) {
+    el.innerHTML = DATA.skills.map((g, i) => `
+      <div class="skill-group reveal" style="--d:${i * 60}ms">
+        <h4>${esc(g.group)}</h4>
+        <ul>${g.items.map(it => `<li class="${isCore(it) ? 'core' : ''}">${esc(skillName(it))}</li>`).join('')}</ul>
+      </div>`).join('');
+  },
+  coreList() { return DATA.skills.flatMap(g => g.items.filter(isCore).map(skillName)); },
+  timeline(el) {
+    const exp = DATA.experience.map((x, i) => `
+      <li class="tl-item reveal" style="--d:${i * 80}ms">
+        <div class="tl-date">${esc(x.period)}</div>
+        <div class="tl-body">
+          <div class="tl-kind">Опыт</div>
+          <h3>${esc(x.org)}</h3><div class="tl-role">${esc(x.role)}</div>
+          ${x.summary ? `<p class="tl-sum">${esc(x.summary)}</p>` : ''}
+          <ul>${x.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+        </div>
+      </li>`).join('');
+    const e = DATA.education;
+    const edu = `
+      <li class="tl-item tl-edu reveal">
+        <div class="tl-date">${esc(e.period)}</div>
+        <div class="tl-body">
+          <div class="tl-kind">Образование</div>
+          <h3>${esc(e.org)}</h3><div class="tl-role">${esc(e.role)}</div>
+          <p class="tl-sum">${esc(e.summary)}</p>
+          <ul>${DATA.courses.map(c => `<li>${esc(c)}</li>`).join('')}</ul>
+        </div>
+      </li>`;
+    el.innerHTML = exp + edu;
+  },
+  projects(el) {
+    el.innerHTML = DATA.projects.map((p, i) => `
+      <article class="proj ${p.flag ? 'flag' : ''} reveal" style="--d:${(i % 3) * 80}ms" data-proj="${i}" tabindex="0" role="button" aria-label="Подробнее: ${esc(p.title)}">
+        <div class="proj-media" aria-hidden="true">
+          ${p.pipeline ? `<div class="pipe">${p.pipeline.map(s => `<span>${esc(s)}</span>`).join('<i></i>')}</div>` : `<div class="proj-code">${esc(p.code)}</div>`}
+        </div>
+        <div class="proj-info">
+          <div class="proj-tag">${esc(p.tag)}</div>
+          ${p.role ? `<div class="proj-role">Роль: ${esc(p.role)}</div>` : ''}
+          <h3>${esc(p.title)}</h3>
+          <p>${esc(p.what)}</p>
+          ${p.metric ? `<div class="proj-metric"><b>${esc(p.metric.v)}</b><span>${esc(p.metric.l)}</span></div>` : ''}
+          <div class="proj-stack">${p.stack.slice(0, 5).map(s => `<span>${esc(s)}</span>`).join('')}${p.stack.length > 5 ? `<span>+${p.stack.length - 5}</span>` : ''}</div>
+          <div class="proj-more">Подробнее <span aria-hidden="true">→</span></div>
+        </div>
+      </article>`).join('');
+  },
+  minis(el) {
+    el.innerHTML = DATA.minis.map((m, i) => `
+      <${m.link ? `a href="${m.link}" target="_blank" rel="noopener"` : 'div'} class="mini reveal" style="--d:${(i % 4) * 60}ms">
+        <b>${esc(m.t)}</b><span>${esc(m.d)}</span><small>${esc(m.s)}${m.link ? ' · GitHub ↗' : ''}</small>
+      </${m.link ? 'a' : 'div'}>`).join('');
+  },
+  hacks(el) {
+    el.innerHTML = DATA.hacks.map((h, i) => `
+      <div class="hack ${h.top ? 'top' : ''} reveal" style="--d:${i * 70}ms">
+        <span class="hack-y">${esc(h.y)}</span><span class="hack-e">${esc(h.e)}</span><span class="hack-r">${esc(h.r)}</span>
+      </div>`).join('');
+  },
+  projectDetails(p) {
+    const link = p.link
+      ? `<a class="btn btn-primary" href="${p.link}" target="_blank" rel="noopener">Открыть на GitHub ↗</a>`
+      : p.private
+        ? `<span class="missing">Корпоративный проект — код и интерфейсы закрыты</span>`
+        : '';
+    return `
+      <div class="m-tag">${esc(p.tag)}</div>
+      <h3 class="m-title">${esc(p.title)}</h3>
+      <p class="m-what">${esc(p.what)}</p>
+      <dl class="m-meta">
+        ${p.role ? `<div><dt>Роль</dt><dd>${esc(p.role)}</dd></div>` : ''}
+        ${p.year ? `<div><dt>Год</dt><dd>${esc(p.year)}</dd></div>` : ''}
+        ${p.metric ? `<div><dt>Метрика</dt><dd>${esc(p.metric.v)} <small>${esc(p.metric.l)}</small></dd></div>` : ''}
+      </dl>
+      <ul class="m-list">${p.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul>
+      <div class="m-stack">${p.stack.map(s => `<span>${esc(s)}</span>`).join('')}</div>
+      ${link ? `<div class="m-actions">${link}</div>` : ''}`;
+  }
+};
+
+/* ---------- Модалка проекта ---------- */
+function setupModal() {
+  const m = document.createElement('div');
+  m.className = 'modal'; m.setAttribute('aria-hidden', 'true');
+  m.innerHTML = `<div class="modal-bg" data-close></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="Детали проекта">
+      <button class="modal-x" data-close aria-label="Закрыть">✕</button><div class="modal-body"></div></div>`;
+  document.body.appendChild(m);
+  let last = null;
+  const open = i => {
+    last = document.activeElement;
+    $('.modal-body', m).innerHTML = UI.projectDetails(DATA.projects[i]);
+    m.classList.add('open'); m.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('lock');
+    setTimeout(() => $('.modal-x', m).focus(), 50);
+  };
+  const close = () => {
+    m.classList.remove('open'); m.setAttribute('aria-hidden', 'true');
+    document.documentElement.classList.remove('lock');
+    if (last) last.focus();
+  };
+  document.addEventListener('click', e => {
+    if (e.target.closest('[data-close]')) return close();
+    const card = e.target.closest('[data-proj]');
+    if (card) open(+card.dataset.proj);
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && m.classList.contains('open')) close();
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-proj]')) { e.preventDefault(); open(+e.target.dataset.proj); }
+  });
+}
+
+/* ---------- Появление при скролле + счётчики + scramble ---------- */
+function setupReveal() {
+  const els = $$('.reveal');
+  if (RM || !('IntersectionObserver' in window)) { els.forEach(e => e.classList.add('in')); $$('.count').forEach(runCounter); $$('[data-scramble]').forEach(e => e.textContent = e.dataset.scramble); return; }
+  const io = new IntersectionObserver(entries => entries.forEach(en => {
+    if (!en.isIntersecting) return;
+    const t = en.target; t.classList.add('in'); io.unobserve(t);
+    $$('.count', t).forEach(runCounter);
+    if (t.matches('[data-scramble]')) scramble(t);
+    $$('[data-scramble]', t).forEach(scramble);
+  }), { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+  els.forEach(e => io.observe(e));
+  $$('[data-scramble]').forEach(e => { if (!e.closest('.reveal') && !e.matches('.reveal')) { e.classList.add('reveal'); io.observe(e); } });
+}
+function runCounter(el) {
+  if (el.dataset.done) return; el.dataset.done = 1;
+  const to = +el.dataset.to, dec = +el.dataset.dec;
+  if (RM) { el.textContent = fmt(to, dec); return; }
+  const dur = 1400, t0 = performance.now();
+  const tick = now => {
+    const p = Math.min(1, (now - t0) / dur), e = 1 - Math.pow(2, -10 * p);
+    el.textContent = fmt(to * (p === 1 ? 1 : e), dec);
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+function scramble(el) {
+  const final = el.dataset.scramble || el.textContent;
+  el.dataset.scramble = final;
+  if (RM) { el.textContent = final; return; }
+  const chars = '░▒▓<>/\\[]{}=+*#01АБВDEF';
+  const dur = 650, t0 = performance.now();
+  const tick = now => {
+    const p = Math.min(1, (now - t0) / dur), n = Math.floor(final.length * p);
+    let out = final.slice(0, n);
+    for (let i = n; i < final.length; i++) out += final[i] === ' ' ? ' ' : chars[(Math.random() * chars.length) | 0];
+    el.textContent = out;
+    if (p < 1) requestAnimationFrame(tick); else el.textContent = final;
+  };
+  requestAnimationFrame(tick);
+}
+
+/* ---------- Кастомный курсор ---------- */
+function setupCursor() {
+  if (TOUCH || RM) return;
+  const dot = document.createElement('div'), ring = document.createElement('div');
+  dot.className = 'cur-dot'; ring.className = 'cur-ring';
+  document.body.append(dot, ring); document.documentElement.classList.add('has-cursor');
+  let x = innerWidth / 2, y = innerHeight / 2, rx = x, ry = y;
+  addEventListener('pointermove', e => { x = e.clientX; y = e.clientY; dot.style.transform = `translate(${x}px,${y}px)`; }, { passive: true });
+  const hoverSel = 'a, button, [data-proj], .magnetic, input, textarea, .ts';
+  document.addEventListener('pointerover', e => ring.classList.toggle('hover', !!e.target.closest(hoverSel)));
+  document.addEventListener('pointerdown', () => ring.classList.add('down'));
+  document.addEventListener('pointerup', () => ring.classList.remove('down'));
+  document.addEventListener('pointerleave', () => { dot.style.opacity = ring.style.opacity = 0; });
+  document.addEventListener('pointerenter', () => { dot.style.opacity = ring.style.opacity = ''; });
+  (function loop() { rx += (x - rx) * 0.18; ry += (y - ry) * 0.18; ring.style.transform = `translate(${rx}px,${ry}px)`; requestAnimationFrame(loop); })();
+}
+
+/* ---------- Магнитные кнопки и наклон карточек ---------- */
+function setupMagnetic(sel = '.magnetic', strength = 0.28) {
+  if (TOUCH || RM) return;
+  $$(sel).forEach(el => {
+    el.addEventListener('pointermove', e => {
+      const r = el.getBoundingClientRect();
+      el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * strength}px,${(e.clientY - r.top - r.height / 2) * strength}px)`;
+    });
+    el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+  });
+}
+function setupTilt(sel, max = 6) {
+  if (TOUCH || RM) return;
+  document.addEventListener('pointermove', e => {
+    const el = e.target.closest && e.target.closest(sel); if (!el) return;
+    const r = el.getBoundingClientRect(), px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+    el.style.setProperty('--rx', ((0.5 - py) * max).toFixed(2) + 'deg');
+    el.style.setProperty('--ry', ((px - 0.5) * max).toFixed(2) + 'deg');
+    el.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+    el.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+  }, { passive: true });
+  document.addEventListener('pointerout', e => {
+    const el = e.target.closest && e.target.closest(sel);
+    if (el && !el.contains(e.relatedTarget)) { el.style.setProperty('--rx', '0deg'); el.style.setProperty('--ry', '0deg'); }
+  });
+}
+
+/* ---------- 3D-облако тегов (CSS 3D, без WebGL) ---------- */
+function tagSphere(el) {
+  const items = DATA.skills.flatMap(g => g.items.map(s => ({ name: shortSkill(s), core: isCore(s) })));
+  const nodes = items.map((t, i) => {
+    const s = document.createElement('span'); s.className = 'ts' + (t.core ? ' core' : ''); s.textContent = t.name; el.appendChild(s);
+    const phi = Math.acos(-1 + (2 * i + 1) / items.length), th = Math.sqrt(items.length * Math.PI) * phi;
+    return { s, x: Math.cos(th) * Math.sin(phi), y: Math.sin(th) * Math.sin(phi), z: Math.cos(phi) };
+  });
+  const base = [0.0016, 0.0026];
+  let ax = base[0], ay = base[1], tx = ax, ty = ay, vis = true;
+  el.addEventListener('pointermove', e => { const r = el.getBoundingClientRect(); ty = ((e.clientX - r.left) / r.width - 0.5) * 0.024; tx = -((e.clientY - r.top) / r.height - 0.5) * 0.024; });
+  el.addEventListener('pointerleave', () => { tx = base[0]; ty = base[1]; });
+  if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { vis = en.isIntersecting; }).observe(el);
+  const step = () => {
+    if (vis) {
+      ax += (tx - ax) * 0.05; ay += (ty - ay) * 0.05;
+      const r = Math.min(el.clientWidth, el.clientHeight) / 2.4;
+      const cx = Math.cos(ax), sx = Math.sin(ax), cy = Math.cos(ay), sy = Math.sin(ay);
+      nodes.forEach(n => {
+        let y = n.y * cx - n.z * sx, z = n.y * sx + n.z * cx;
+        const x = n.x * cy + z * sy; z = -n.x * sy + z * cy;
+        n.x = x; n.y = y; n.z = z;
+        n.s.style.transform = `translate(-50%,-50%) translate3d(${(x * r).toFixed(1)}px,${(y * r).toFixed(1)}px,0) scale(${((z + 2) / 3).toFixed(3)})`;
+        n.s.style.opacity = (0.2 + 0.8 * (z + 1) / 2).toFixed(2);
+        n.s.style.zIndex = Math.round(z * 100) + 100;
+      });
+    }
+    if (!RM) requestAnimationFrame(step);
+  };
+  step();
+}
+
+/* ---------- Прелоадер ---------- */
+function finishPreloader(onDone, minMs = 900) {
+  const pre = $('.preloader'), t0 = performance.now();
+  const done = () => {
+    const wait = RM ? 0 : Math.max(0, minMs - (performance.now() - t0));
+    setTimeout(() => { if (pre) pre.classList.add('gone'); document.documentElement.classList.add('ready'); onDone && onDone(); setTimeout(() => pre && pre.remove(), 900); }, wait);
+  };
+  if (document.readyState === 'complete') done(); else addEventListener('load', done, { once: true });
+  setTimeout(() => { if (!document.documentElement.classList.contains('ready')) done(); }, 3500); // страховка, если CDN тормозит
+}
+
+/* ---------- Прогресс скролла и активный пункт меню ---------- */
+function setupNav() {
+  const bar = $('.progress');
+  const links = $$('.nav a[href^="#"]');
+  const secs = links.map(a => $(a.getAttribute('href'))).filter(Boolean);
+  const onScroll = () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    if (bar) bar.style.transform = `scaleX(${h > 0 ? scrollY / h : 0})`;
+    let cur = null;
+    secs.forEach(s => { if (s.getBoundingClientRect().top < innerHeight * 0.4) cur = s; });
+    links.forEach(a => a.classList.toggle('active', cur && a.getAttribute('href') === '#' + cur.id));
+    document.documentElement.classList.toggle('scrolled', scrollY > 40);
+  };
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  const burger = $('.burger'), nav = $('.nav');
+  if (burger && nav) {
+    burger.addEventListener('click', () => { const o = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', o); });
+    links.forEach(a => a.addEventListener('click', () => { nav.classList.remove('open'); burger.setAttribute('aria-expanded', false); }));
+  }
+}
+
+/* ---------- Копирование e-mail ---------- */
+function setupCopy() {
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-copy]'); if (!b) return;
+    e.preventDefault();
+    const txt = b.dataset.copy, lab = b.querySelector('.copy-label') || b, old = lab.textContent;
+    const ok = () => { lab.textContent = 'Скопировано ✓'; setTimeout(() => lab.textContent = old, 1600); };
+    if (navigator.clipboard) navigator.clipboard.writeText(txt).then(ok, () => location.href = 'mailto:' + txt); else location.href = 'mailto:' + txt;
+  });
+}
+
+function initCommon() {
+  setupModal(); setupReveal(); setupCursor(); setupMagnetic(); setupNav(); setupCopy();
+  $$('[data-year]').forEach(e => e.textContent = new Date().getFullYear());
+}
+
+
+/* ---------- рендер ---------- */
+$('#pitch').textContent = DATA.pitch;
+UI.stats($('#stats'));
+UI.about($('#about-text'));
+UI.strengths($('#strengths'));
+$('#spec tbody').innerHTML = DATA.skills.map((g, i) => {
+  const core = g.items.filter(isCore).length;
+  return `<tr><td>${String(i + 1).padStart(2, '0')}</td><td>${esc(g.group)}</td>
+    <td><ul>${g.items.map(it => `<li class="${isCore(it) ? 'core' : ''}">${esc(skillName(it))}</li>`).join('')}</ul></td>
+    <td>${g.items.length} поз.${core ? `<br><span class="amb">ядро: ${core}</span>` : ''}</td></tr>`;
+}).join('');
+$$('.filter button').forEach(b => b.addEventListener('click', () => {
+  $$('.filter button').forEach(x => x.setAttribute('aria-pressed', x === b));
+  $('#spec').classList.toggle('core-only', b.dataset.f === 'core');
+}));
+UI.timeline($('#timeline'));
+UI.projects($('#projects-grid'));
+UI.minis($('#minis'));
+UI.hacks($('#hacks'));
+initCommon();
+finishPreloader(() => { const r = $('.hero-role'); if (r) scramble(r); }, 1200);
+
+/* координаты рядом с курсором-перекрестьем */
+if (!TOUCH && !RM) {
+  const xy = document.createElement('div'); xy.className = 'cur-xy'; document.body.appendChild(xy);
+  addEventListener('pointermove', e => {
+    xy.style.transform = `translate(${e.clientX + 18}px,${e.clientY + 14}px)`;
+    xy.textContent = `X ${String(Math.round(e.clientX)).padStart(4, '0')}  Y ${String(Math.round(e.clientY + scrollY)).padStart(5, '0')}`;
+  }, { passive: true });
+}
+
+/* ---------- 3D: каркас здания + лазерная плоскость сверки ---------- */
+(function hero3D() {
+  const canvas = $('#gl');
+  if (!window.THREE) { document.documentElement.classList.add('no-gl'); return; }
+  let renderer;
+  try { renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true }); }
+  catch (e) { document.documentElement.classList.add('no-gl'); return; }
+  renderer.setPixelRatio(Math.min(devicePixelRatio, MOBILE() ? 1.25 : 1.75));
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+
+  const F = MOBILE() ? 6 : 8, FH = 0.5, W = 4.2, D = 2.8, NX = 6, NZ = 4;
+  const H = F * FH;
+  const v = [];
+  const seg = (a, b) => v.push(a[0], a[1], a[2], b[0], b[1], b[2]);
+  const x0 = -W / 2, z0 = -D / 2;
+  // перекрытия и балки
+  for (let k = 0; k <= F; k++) {
+    const y = k * FH;
+    for (let i = 0; i < NX; i++) { const x = x0 + (W / (NX - 1)) * i; seg([x, y, z0], [x, y, -z0]); }
+    for (let j = 0; j < NZ; j++) { const z = z0 + (D / (NZ - 1)) * j; seg([x0, y, z], [-x0, y, z]); }
+  }
+  // колонны
+  for (let i = 0; i < NX; i++) for (let j = 0; j < NZ; j++) {
+    const x = x0 + (W / (NX - 1)) * i, z = z0 + (D / (NZ - 1)) * j; seg([x, 0, z], [x, H, z]);
+  }
+  // надстройка-башня
+  const tw = 1.6, td = 1.2, tH = 3 * FH;
+  for (let k = 1; k <= 3; k++) {
+    const y = H + k * FH;
+    seg([-tw / 2, y, -td / 2], [tw / 2, y, -td / 2]); seg([tw / 2, y, -td / 2], [tw / 2, y, td / 2]);
+    seg([tw / 2, y, td / 2], [-tw / 2, y, td / 2]); seg([-tw / 2, y, td / 2], [-tw / 2, y, -td / 2]);
+  }
+  [[-1, -1], [1, -1], [1, 1], [-1, 1]].forEach(([a, b]) => seg([a * tw / 2, H, b * td / 2], [a * tw / 2, H + tH, b * td / 2]));
+  // диагональные связи на торцах
+  for (let k = 0; k < F; k += 2) { seg([x0, k * FH, z0], [x0, (k + 1) * FH, -z0]); seg([-x0, k * FH, -z0], [-x0, (k + 1) * FH, z0]); }
+  const TOP = H + tH;
+
+  const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.Float32BufferAttribute(v, 3));
+  const mat = new THREE.ShaderMaterial({
+    uniforms: { uScan: { value: 0 }, uBlue: { value: new THREE.Color('#6FB6FF') }, uAmber: { value: new THREE.Color('#FFB547') } },
+    vertexShader: `varying float vY; void main(){ vY = position.y; gl_Position = projectionMatrix*modelViewMatrix*vec4(position,1.); }`,
+    fragmentShader: `uniform float uScan; uniform vec3 uBlue; uniform vec3 uAmber; varying float vY;
+      void main(){ float d = abs(vY-uScan); float near = smoothstep(.45,0.,d); float passed = step(vY,uScan);
+        vec3 c = mix(uBlue, uAmber, near);
+        float a = .22 + passed*.18 + near*.6;
+        gl_FragColor = vec4(c, a); }`,
+    transparent: true, depthWrite: false
+  });
+  const bldg = new THREE.Group(); scene.add(bldg);
+  bldg.add(new THREE.LineSegments(geo, mat));
+
+  const scan = new THREE.Mesh(new THREE.PlaneGeometry(W + 1.4, D + 1.4), new THREE.MeshBasicMaterial({ color: 0xFFB547, transparent: true, opacity: 0.08, side: THREE.DoubleSide, depthWrite: false, blending: THREE.AdditiveBlending }));
+  scan.rotation.x = -Math.PI / 2;
+  scan.add(new THREE.LineSegments(new THREE.EdgesGeometry(scan.geometry), new THREE.LineBasicMaterial({ color: 0xFFB547, transparent: true, opacity: 0.9 })));
+  bldg.add(scan);
+
+  const grid = new THREE.GridHelper(14, 28, 0x2D5784, 0x1C3756); grid.material.transparent = true; grid.material.opacity = 0.5; bldg.add(grid);
+
+  // точки расхождений (иллюстративные метки интерфейса, не данные)
+  const marks = [
+    { p: new THREE.Vector3(x0 + W * 0.2, FH * 2, -z0), t: 'Δ-01 · <b>расхождение</b> ПД ↔ РД' },
+    { p: new THREE.Vector3(-x0, FH * 5, 0.3), t: 'Δ-02 · <b>нет данных</b> → сравнение невозможно' },
+    { p: new THREE.Vector3(0.2, H + FH * 2, td / 2), t: 'Δ-03 · <b>совпадение</b> ✓' }
+  ];
+  const mBox = $('#markers');
+  marks.forEach((m, i) => {
+    const dot = new THREE.Mesh(new THREE.SphereGeometry(0.06, 12, 12), new THREE.MeshBasicMaterial({ color: i === 2 ? 0x5BE3A1 : 0xFF6B6B }));
+    dot.position.copy(m.p); bldg.add(dot);
+    m.el = document.createElement('div'); m.el.className = 'marker'; m.el.innerHTML = `<span>${m.t}</span>`;
+    if (i === 2) m.el.style.color = 'var(--ok)';
+    mBox.appendChild(m.el);
+  });
+
+  const resize = () => {
+    const r = canvas.getBoundingClientRect(); renderer.setSize(r.width, r.height, false);
+    // при видимом портрете (>1100px) сдвигаем здание влево внутри канваса
+    const k = innerWidth > 1100 ? 1.35 : 1;
+    camera.aspect = r.width * k / Math.max(r.height, 1);
+    if (k > 1) camera.setViewOffset(r.width * k, r.height, r.width * (k - 1), 0, r.width, r.height); else camera.clearViewOffset();
+    camera.updateProjectionMatrix();
+  };
+  resize(); addEventListener('resize', resize);
+  let mx = 0, my = 0, smx = 0, smy = 0;
+  addEventListener('pointermove', e => { mx = e.clientX / innerWidth - 0.5; my = e.clientY / innerHeight - 0.5; }, { passive: true });
+  let inView = true;
+  if ('IntersectionObserver' in window) new IntersectionObserver(([en]) => { inView = en.isIntersecting; if (inView && !RM) loop(); }).observe(canvas);
+  const clock = new THREE.Clock(), tmp = new THREE.Vector3();
+  function frame() {
+    const t = RM ? 3 : clock.getElapsedTime();
+    const prog = Math.min(scrollY / innerHeight, 1);
+    smx += (mx - smx) * 0.05; smy += (my - smy) * 0.05;
+    const cycle = 5.5, ph = (t % cycle) / cycle;
+    const scanY = RM ? TOP * 0.6 : ph * (TOP + 0.6) - 0.2;
+    mat.uniforms.uScan.value = scanY; scan.position.y = scanY;
+    const ang = 0.7 + t * 0.07 + smx * 0.9 + prog * 1.4, R = 12.5 - prog * 2;
+    camera.position.set(Math.sin(ang) * R, 5.2 + smy * -2.5 + prog * 2, Math.cos(ang) * R);
+    camera.lookAt(0, TOP * 0.42, 0);
+    bldg.position.y = -0.4;
+    renderer.render(scene, camera);
+    // HTML-метки поверх канваса
+    const r = canvas.getBoundingClientRect();
+    marks.forEach(m => {
+      tmp.copy(m.p); tmp.y += bldg.position.y; tmp.project(camera);
+      m.el.style.transform = `translate(${((tmp.x + 1) / 2 * r.width).toFixed(1)}px,${((1 - tmp.y) / 2 * r.height).toFixed(1)}px)`;
+      m.el.classList.toggle('on', scanY > m.p.y - 0.1);
+    });
+  }
+  function loop() { if (!inView) return; frame(); if (!RM) requestAnimationFrame(loop); }
+  if (RM) { frame(); addEventListener('scroll', frame, { passive: true }); addEventListener('resize', frame); } else loop();
+})();
+</script>
 </body>
 </html>
